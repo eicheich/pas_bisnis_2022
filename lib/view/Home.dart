@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 50, left: 20, right: 20),
+        padding: EdgeInsets.only(top: 50, left: 0, right: 0),
         child: Column(
           children: [
             Row(
@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
                           decoration: BoxDecoration(
                             image: DecorationImage(
                                 image:
-                                    AssetImage('assets/image/New arrival.png'),
+                                    AssetImage('assets/images/New arrival.png'),
                                 fit: BoxFit.fitWidth),
                           ))),
                 ])),
@@ -121,7 +121,7 @@ class _HomeState extends State<Home> {
                           decoration: BoxDecoration(
                             color: Color.fromRGBO(217, 217, 217, 1),
                             image: DecorationImage(
-                                image: AssetImage('assets/image/Promo.png'),
+                                image: AssetImage('assets/images/Promo.png'),
                                 fit: BoxFit.fitWidth),
                           ))),
                 ]))
