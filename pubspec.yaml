@@ -65,6 +65,14 @@ flutter:
   - assets/images/Ufee.png
   - assets/images/New arrival.png
   - assets/images/Promo.png
+  - assets/images/home.png
+  - assets/images/selectedHome.png
+  - assets/images/shop.png
+  - assets/images/selectedShop.png
+  - assets/images/history.png
+  - assets/images/selectedHistory.png
+  - assets/images/user.png
+  - assets/images/selectedUser.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
