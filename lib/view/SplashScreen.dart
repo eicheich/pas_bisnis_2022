@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ],
           ),
         ),
-        child: Image.asset('assets/image/Ufee.png'),
+        child: Image.asset('assets/images/Ufee.png'),
       ),
       splashIconSize: 2000,
       nextScreen: Navigation(),
