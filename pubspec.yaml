@@ -35,7 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   animated_splash_screen: ^1.3.0
-  material_floating_search_bar: ^0.3.7
+  
 
 
 dev_dependencies:
@@ -64,8 +64,8 @@ flutter:
   assets:
   - assets/fonts/Lexend-Regular.ttf
   - assets/images/Ufee.png
-  - assets/images/New arrival.png
-  - assets/images/Promo.png
+  - assets/images/newin.png
+  - assets/images/Disc.png
   - assets/images/home.png
   - assets/images/selectedHome.png
   - assets/images/shop.png
