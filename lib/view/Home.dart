@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pas_bisnis_2022/model/ProductModel.dart';
+import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,9 +14,35 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  ProductModel? productModel;
+  bool isloaded = true;
+
+  void getAllListPL() async {
+    
+    final res = await http.get(
+      Uri.parse(
+          "https://api-shoestore.000webhostapp.com/data.php"),
+    );
+    print("status code " + res.statusCode.toString());
+    productModel =
+        ProductModel.fromJson(json.decode(res.body.toString()));
+    print("team 0 : " + productModel!.data![0].title.toString());
+    setState(() {
+      isloaded = true;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAllListPL();
+  }
   TextEditingController _searchQueryController = TextEditingController();
   bool _isSearching = false;
   String searchQuery = "Search query";
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
