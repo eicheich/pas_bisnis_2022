@@ -153,7 +153,6 @@ class _HomeState extends State<Home> {
                     Positioned.fill(
                         child: Container(
                             alignment: Alignment.center,
-                            height: 500,
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage('assets/images/Disc.png'),
@@ -175,23 +174,58 @@ class _HomeState extends State<Home> {
                               fontWeight: FontWeight.bold,
                               height: 1),
                         )),
-                    Positioned.fill(
-                        top: 380,
-                        child: Text(
-                          'SHOP',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Color.fromRGBO(255, 255, 255, 1),
-                              fontFamily: 'Lexend',
-                              fontSize: 20,
-                              letterSpacing:
-                                  0 /*percentages not used in flutter. defaulting to zero*/,
-                              fontWeight: FontWeight.normal,
-                              height: 1),
-                        )),
                   ])),
             ]),
           ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Container(
+                  height: 96,
+                  child: Container(
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned.fill(
+                            top: 40,
+                            child: Text(
+                              '   Shop by Brand',
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                  // make the font bold
+
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontFamily: 'Lexend',
+                                  fontSize: 22,
+                                  letterSpacing:
+                                      0 /*percentages not used in flutter. defaulting to zero*/,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1),
+                            )),
+                      ],
+                    ),
+                  ))
+            ]),
+          ),
+          // SliverGrid(
+          //   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          //     maxCrossAxisExtent: 200.0,
+          //     mainAxisSpacing: 10.0,
+          //     crossAxisSpacing: 10.0,
+          //     childAspectRatio: 4.0,
+          //   ),
+          //   delegate: SliverChildBuilderDelegate(
+          //     (BuildContext context, int index) {
+          //       return Container(
+          //         width: 10,
+          //         alignment: Alignment.center,
+          //         color: Colors.teal[100 * (index % 9)],
+          //         child: Text('Grid Item $index'),
+          //       );
+          //     },
+          //     childCount: 6,
+          //   ),
+          // ),
+          // gridview
+          
         ],
       ),
     );
