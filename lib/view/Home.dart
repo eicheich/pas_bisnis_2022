@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:pas_bisnis_2022/view/ListBrand.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
@@ -205,52 +206,112 @@ class _HomeState extends State<Home> {
                   ))
             ]),
           ),
-          // SliverPadding(
-          //   padding: const EdgeInsets.all(20),
-          //   sliver: SliverGrid.count(
-          //     crossAxisSpacing: 20,
-          //     mainAxisSpacing: 20,
-          //     crossAxisCount: 3,
-          //     children: <Widget>[
-          //       Container(
-          //         child: isloaded == true
-          //             ? Image.network(
-          //                 productModel!.data![0].imgbrand.toString())
-          //             : Text(""),
-          //       ),
-          //       Container(
-          //         child: isloaded == true
-          //             ? Image.network(
-          //                 productModel!.data![1].imgbrand.toString())
-          //             : Text(""),
-          //       ),
-          //       Container(
-          //         child: isloaded == true
-          //             ? Image.network(
-          //                 productModel!.data![3].imgbrand.toString())
-          //             : Text(""),
-          //       ),
-          //       Container(
-          //         child: isloaded == true
-          //             ? Image.network(
-          //                 productModel!.data![4].imgbrand.toString())
-          //             : Text(""),
-          //       ),
-          //       Container(
-          //         child: isloaded == true
-          //             ? Image.network(
-          //                 productModel!.data![5].imgbrand.toString())
-          //             : Text(""),
-          //       ),
-          //       Container(
-          //         child: isloaded == true
-          //             ? Image.network(
-          //                 productModel!.data![16].imgbrand.toString())
-          //             : Text(""),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          SliverPadding(
+            padding: const EdgeInsets.all(20),
+            sliver: SliverGrid.count(
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              crossAxisCount: 3,
+              children: <Widget>[
+                InkWell(
+                  child: Container(
+                    child: isloaded == true
+                        ? Image.network(
+                            productModel!.data![0].imgbrand.toString())
+                        : Text(""),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => listbrand(
+                                  data: productModel!.data![0],
+                                )));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    child: isloaded == true
+                        ? Image.network(
+                            productModel!.data![1].imgbrand.toString())
+                        : Text(""),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => listbrand(
+                                  data: productModel!.data![1],
+                                )));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    child: isloaded == true
+                        ? Image.network(
+                            productModel!.data![3].imgbrand.toString())
+                        : Text(""),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => listbrand(
+                                  data: productModel!.data![3],
+                                )));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    child: isloaded == true
+                        ? Image.network(
+                            productModel!.data![4].imgbrand.toString())
+                        : Text(""),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => listbrand(
+                                  data: productModel!.data![4],
+                                )));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    child: isloaded == true
+                        ? Image.network(
+                            productModel!.data![5].imgbrand.toString())
+                        : Text(""),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => listbrand(
+                                  data: productModel!.data![5],
+                                )));
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    child: isloaded == true
+                        ? Image.network(
+                            productModel!.data![16].imgbrand.toString())
+                        : Text(""),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => listbrand(
+                                  data: productModel!.data![16],
+                                )));
+                  },
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
