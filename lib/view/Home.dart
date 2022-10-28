@@ -18,15 +18,15 @@ class _HomeState extends State<Home> {
   bool isloaded = true;
 
   void getAllListPL() async {
-    
+    setState(() {
+      isloaded = false;
+    });
     final res = await http.get(
-      Uri.parse(
-          "https://api-shoestore.000webhostapp.com/data.php"),
+      Uri.parse("https://api-shoestore.000webhostapp.com/data.php"),
     );
     print("status code " + res.statusCode.toString());
-    productModel =
-        ProductModel.fromJson(json.decode(res.body.toString()));
-    print("team 0 : " + productModel!.data![0].title.toString());
+    productModel = ProductModel.fromJson(json.decode(res.body.toString()));
+    print("team 0 : " + productModel!.data![0].brand.toString());
     setState(() {
       isloaded = true;
     });
@@ -38,10 +38,10 @@ class _HomeState extends State<Home> {
     super.initState();
     getAllListPL();
   }
+
   TextEditingController _searchQueryController = TextEditingController();
   bool _isSearching = false;
   String searchQuery = "Search query";
-
 
   @override
   Widget build(BuildContext context) {
@@ -205,27 +205,52 @@ class _HomeState extends State<Home> {
                   ))
             ]),
           ),
-          // SliverGrid(
-          //   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          //     maxCrossAxisExtent: 200.0,
-          //     mainAxisSpacing: 10.0,
-          //     crossAxisSpacing: 10.0,
-          //     childAspectRatio: 4.0,
-          //   ),
-          //   delegate: SliverChildBuilderDelegate(
-          //     (BuildContext context, int index) {
-          //       return Container(
-          //         width: 10,
-          //         alignment: Alignment.center,
-          //         color: Colors.teal[100 * (index % 9)],
-          //         child: Text('Grid Item $index'),
-          //       );
-          //     },
-          //     childCount: 6,
+          // SliverPadding(
+          //   padding: const EdgeInsets.all(20),
+          //   sliver: SliverGrid.count(
+          //     crossAxisSpacing: 20,
+          //     mainAxisSpacing: 20,
+          //     crossAxisCount: 3,
+          //     children: <Widget>[
+          //       Container(
+          //         child: isloaded == true
+          //             ? Image.network(
+          //                 productModel!.data![0].imgbrand.toString())
+          //             : Text(""),
+          //       ),
+          //       Container(
+          //         child: isloaded == true
+          //             ? Image.network(
+          //                 productModel!.data![1].imgbrand.toString())
+          //             : Text(""),
+          //       ),
+          //       Container(
+          //         child: isloaded == true
+          //             ? Image.network(
+          //                 productModel!.data![3].imgbrand.toString())
+          //             : Text(""),
+          //       ),
+          //       Container(
+          //         child: isloaded == true
+          //             ? Image.network(
+          //                 productModel!.data![4].imgbrand.toString())
+          //             : Text(""),
+          //       ),
+          //       Container(
+          //         child: isloaded == true
+          //             ? Image.network(
+          //                 productModel!.data![5].imgbrand.toString())
+          //             : Text(""),
+          //       ),
+          //       Container(
+          //         child: isloaded == true
+          //             ? Image.network(
+          //                 productModel!.data![16].imgbrand.toString())
+          //             : Text(""),
+          //       ),
+          //     ],
           //   ),
           // ),
-          // gridview
-          
         ],
       ),
     );
