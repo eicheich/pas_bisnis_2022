@@ -1,11 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:pas_bisnis_2022/view/DetailPage.dart';
 import 'package:pas_bisnis_2022/view/ListBrand.dart';
+import 'package:pas_bisnis_2022/view/Cart.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
@@ -77,8 +77,14 @@ class _HomeState extends State<Home> {
               Icons.shopping_cart,
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => cart()),
+              );
+            },
           ),
+          
         ],
       ),
       SliverList(
