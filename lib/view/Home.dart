@@ -225,7 +225,6 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => listbrand(
-                                  data: productModel!.data![0],
                                 )));
                   },
                 ),
@@ -241,7 +240,6 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => listbrand(
-                                  data: productModel!.data![1],
                                 )));
                   },
                 ),
@@ -257,7 +255,6 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => listbrand(
-                                  data: productModel!.data![3],
                                 )));
                   },
                 ),
@@ -273,7 +270,6 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => listbrand(
-                                  data: productModel!.data![4],
                                 )));
                   },
                 ),
@@ -289,7 +285,6 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => listbrand(
-                                  data: productModel!.data![5],
                                 )));
                   },
                 ),
@@ -305,7 +300,6 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => listbrand(
-                                  data: productModel!.data![16],
                                 )));
                   },
                 ),
