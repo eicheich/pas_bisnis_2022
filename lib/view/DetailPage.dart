@@ -14,16 +14,23 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detail Page'),
+        title: Text(widget.data.title.toString()),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          children: const [
-            Text('Detail Page'),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(widget.data.title.toString()),
+            Text(widget.data.price.toString()),
+            Text(widget.data.desc.toString()),
+            Text('rating : ' + widget.data.rating.toString()),
+            Text(widget.data.brand.toString()),
+            Image.network(widget.data.img1.toString()),
+            Image.network(widget.data.img2.toString()),
+            Image.network(widget.data.imgbrand.toString()),
           ],
         ),
       ),
     );
-    
   }
 }
