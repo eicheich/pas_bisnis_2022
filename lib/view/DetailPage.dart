@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
-// import 'package:pas_bisnis_2022/view/cart.dart';
+import 'package:pas_bisnis_2022/view/transaction.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'package:path/path.dart';
@@ -109,9 +109,18 @@ class _DetailPageState extends State<DetailPage> {
             Image.network(widget.data.img1.toString()),
             Image.network(widget.data.img2.toString()),
             Image.network(widget.data.imgbrand.toString()),
-          ],
-        ),
-      ),
-    );
+            // button
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => transaction(data: widget.data)),
+                  );
+                },
+                child: Text('Beli')),
+        
+  ]),
+    ));
   }
 }
