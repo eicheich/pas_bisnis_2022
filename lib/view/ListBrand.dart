@@ -5,8 +5,7 @@ import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:http/http.dart' as http;
 
 class listbrand extends StatefulWidget {
-  listbrand({Key? key, required this.data}) : super(key: key);
-  Data data;
+  listbrand({Key? key}) : super(key: key);
 
   @override
   State<listbrand> createState() => _listbrandState();
@@ -41,29 +40,66 @@ class _listbrandState extends State<listbrand> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: Color.fromARGB(255, 234, 234, 234),
-        // body: Center(
-        //   child: Card(
-        //     child: isloaded == true
-        //         ? ListView(
-        //             children: [
-        //               Container(
-        //                 height: 100,
-        //                 width: 100,
-        //                 child: Image.network(
-        //                   widget.data.img1.toString(),
-        //                   fit: BoxFit.cover,
-        //                 ),
-        //               ),
-        //               Text(widget.data.brand.toString()),
-        //               Text(widget.data.title.toString()),
-        //               Text(widget.data.price.toString()),
-        //               Text(widget.data.desc.toString()),
-        //             ],
-        //           )
-        //         : CircularProgressIndicator(),
-        //   ),
-        // )
-        );
+        appBar: isloaded == true
+            ? AppBar(title: Text(productModel!.data![0].brand.toString()))
+            : AppBar(title: Text("Loading")),
+        body: Center(
+          child: Column(
+            children: [
+              InkWell(
+                child: Card(
+                  child: isloaded == true
+                      ? Container(
+                          margin: EdgeInsets.all(12),
+                          child: Row(
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  width: 40,
+                                  height: 40,
+                                  child: Image.network(
+                                      productModel!.data![0].img1.toString())),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(productModel!.data![0].title.toString()),
+                                  Text(productModel!.data![0].price.toString()),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      : Text(""),
+                ),
+              ),
+              InkWell(
+                child: Card(
+                  child: isloaded == true
+                      ? Container(
+                          margin: EdgeInsets.all(12),
+                          child: Row(
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  width: 40,
+                                  height: 40,
+                                  child: Image.network(
+                                      productModel!.data![0].img1.toString())),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(productModel!.data![0].title.toString()),
+                                  Text(productModel!.data![0].price.toString()),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      : Text(""),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }
