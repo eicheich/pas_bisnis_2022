@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:pas_bisnis_2022/services/Notification.dart';
@@ -9,7 +7,6 @@ import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'package:path/path.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 class purchased extends StatefulWidget {
   purchased({Key? key, required this.data}) : super(key: key);
@@ -43,7 +40,8 @@ class _purchasedState extends State<purchased> {
     isPurchased = await read(widget.data.id);
     setState(() {});
   }
-    Future<void> insert(Data data) async {
+
+  Future<void> insert(Data data) async {
     final Database db = await database;
     await db.insert(
       'data',
@@ -83,11 +81,12 @@ class _purchasedState extends State<purchased> {
           ),
           ElevatedButton(
             onPressed: isPurchased
-                ? null
+                ? null //jika sudah pernah membeli
+                
                 : () async {
                     await insert(widget.data);
                     setState(() {
-                      isPurchased = true;
+                      isPurchased = true ;
                     });
                     Navigator.push(
                       context,
@@ -95,8 +94,8 @@ class _purchasedState extends State<purchased> {
                     );
                   },
             child: Text("Back to Home"),
-
-          ),],
+          ),
+        ],
       )),
     );
   }

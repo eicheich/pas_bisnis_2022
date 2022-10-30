@@ -53,19 +53,19 @@ class _historyState extends State<history> {
     });
   }
 
-  // Future<void> delete(String? id) async {
-  //   final db = await database;
-  //   await db.delete(
-  //     'data',
-  //     where: "id = ?",
-  //     whereArgs: [id],
-  //   );
-  //   getHistory().then((value) {
-  //     setState(() {
-  //       historydata = value;
-  //     });
-  //   });
-  // }
+  Future<void> delete(String? id) async {
+    final db = await database;
+    await db.delete(
+      'data',
+      where: "id = ?",
+      whereArgs: [id],
+    );
+    getHistory().then((value) {
+      setState(() {
+        historydata = value;
+      });
+    });
+  }
 
   @override
   void initState() {
@@ -130,24 +130,24 @@ class _historyState extends State<history> {
                                   ),
                                 ]),
                           ),
-                          // Container(
-                          //   margin: EdgeInsets.only(left: 80),
-                          //   child: InkWell(
-                          //     onTap: () {
-                          //       delete(historydata[index].id).then((value) {
-                          //         getHistory().then((value) {
-                          //           setState(() {
-                          //             historydata = value;
-                          //           });
-                          //         });
-                          //       });
-                          //     },
-                          //     child: Icon(
-                          //       CupertinoIcons.cart_badge_minus,
-                          //       color: Colors.red,
-                          //     ),
-                          //   ),
-                          // ),
+                          Container(
+                            margin: EdgeInsets.only(left: 80),
+                            child: InkWell(
+                              onTap: () {
+                                delete(historydata[index].id).then((value) {
+                                  getHistory().then((value) {
+                                    setState(() {
+                                      historydata = value;
+                                    });
+                                  });
+                                });
+                              },
+                              child: Icon(
+                                CupertinoIcons.delete_simple,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
