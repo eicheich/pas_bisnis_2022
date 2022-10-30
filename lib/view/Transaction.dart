@@ -131,6 +131,7 @@ class _transactionState extends State<transaction> {
                           body: "wait for the " +
                               widget.data.title.toString() +
                               " to arrive",
+                         
                           fln: flutterLocalNotificationsPlugin);
                     },
                     child: const Text('Buy Now')),
