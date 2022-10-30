@@ -2,24 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:pas_bisnis_2022/view/DetailPage.dart';
-import 'package:pas_bisnis_2022/view/DetailPurchase.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class history extends StatefulWidget {
-  const history({Key? key}) : super(key: key);
+class cart extends StatefulWidget {
+  const cart({Key? key}) : super(key: key);
 
   @override
-  State<history> createState() => _historyState();
+  State<cart> createState() => _cartState();
 }
 
-class _historyState extends State<history> {
+class _cartState extends State<cart> {
   var database;
-  List<Data> historydata = <Data>[];
+  List<Data> cartdata = <Data>[];
 
   Future initDb() async {
     database = openDatabase(
-      join(await getDatabasesPath(), 'history_database.db'),
+      join(await getDatabasesPath(), 'pdata_database.db'),
       onCreate: (db, version) {
         return db.execute(
           'CREATE TABLE data(id TEXT, title TEXT, price TEXT , desc TEXT , rating TEXT , sold TEXT, img1 TEXT , img2 TEXT , imgbrand TEXT, brand TEXT)',
@@ -27,14 +26,14 @@ class _historyState extends State<history> {
       },
       version: 1,
     );
-    getHistory().then((value) {
+    getAddCart().then((value) {
       setState(() {
-        historydata = value;
+        cartdata = value;
       });
     });
   }
 
-  Future<List<Data>> getHistory() async {
+  Future<List<Data>> getAddCart() async {
     final Database db = await database;
     final List<Map<String, dynamic>> maps = await db.query('data');
     return List.generate(maps.length, (i) {
@@ -60,9 +59,9 @@ class _historyState extends State<history> {
       where: "id = ?",
       whereArgs: [id],
     );
-    getHistory().then((value) {
+    getAddCart().then((value) {
       setState(() {
-        historydata = value;
+        cartdata = value;
       });
     });
   }
@@ -77,7 +76,7 @@ class _historyState extends State<history> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Purchase History'),
+        title: const Text('Cart'),
       ),
       backgroundColor: Color.fromARGB(255, 234, 234, 234),
       body: ListView.builder(
@@ -87,8 +86,8 @@ class _historyState extends State<history> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => DetailPurchase(
-                          data: historydata[index],
+                    builder: (context) => DetailPage(
+                          data: cartdata[index],
                         )),
               ).then((value) => initDb());
               ;
@@ -110,7 +109,7 @@ class _historyState extends State<history> {
                               height: 40,
                               child: FadeInImage.assetNetwork(
                                 placeholder: " ",
-                                image: historydata[index].img1.toString(),
+                                image: cartdata[index].img1.toString(),
                               )),
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
@@ -120,12 +119,12 @@ class _historyState extends State<history> {
                                   Container(
                                     width: 150,
                                     child: Text(
-                                      historydata[index].title.toString(),
+                                      cartdata[index].title.toString(),
                                       style: TextStyle(color: Colors.black),
                                     ),
                                   ),
                                   Text(
-                                    historydata[index].price.toString(),
+                                    cartdata[index].price.toString(),
                                     style: TextStyle(color: Colors.black),
                                   ),
                                 ]),
@@ -134,16 +133,16 @@ class _historyState extends State<history> {
                             margin: EdgeInsets.only(left: 80),
                             child: InkWell(
                               onTap: () {
-                                delete(historydata[index].id).then((value) {
-                                  getHistory().then((value) {
+                                delete(cartdata[index].id).then((value) {
+                                  getAddCart().then((value) {
                                     setState(() {
-                                      historydata = value;
+                                      cartdata = value;
                                     });
                                   });
                                 });
                               },
                               child: Icon(
-                                CupertinoIcons.delete_simple,
+                                CupertinoIcons.cart_badge_minus,
                                 color: Colors.red,
                               ),
                             ),
@@ -157,7 +156,7 @@ class _historyState extends State<history> {
             ),
           );
         },
-        itemCount: historydata.length,
+        itemCount: cartdata.length,
       ),
     );
   }
