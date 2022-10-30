@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
-import 'package:pas_bisnis_2022/view/Navigation.dart';
+import 'package:pas_bisnis_2022/services/Notification.dart';
 
 class purchased extends StatefulWidget {
   purchased({Key? key, required this.data}) : super(key: key);
@@ -11,6 +11,7 @@ class purchased extends StatefulWidget {
 }
 
 class _purchasedState extends State<purchased> {
+  int ship = 45000;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +34,19 @@ class _purchasedState extends State<purchased> {
           const SizedBox(
             height: 20,
           ),
-          Text('Rp.' + widget.data.price.toString()),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Total : '),
+                Text('Rp.' +
+                    (int.parse(ship.toString()) +
+                            int.parse(widget.data.price.toString()))
+                        .toString()),
+              ],
+            ),
+          ),
           const SizedBox(
             height: 20,
           ),
@@ -41,10 +54,18 @@ class _purchasedState extends State<purchased> {
           const SizedBox(
             height: 20,
           ),
-          ElevatedButton(
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Navigation())),
-              child: const Text('Back To Home'))
+          // button to see details
+          // ElevatedButton(
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => purchased(data: widget.data),
+          //       ),
+          //     );
+          //   },
+          //   child: const Text('See Details'),
+          // ),
         ],
       )),
     );

@@ -1,10 +1,17 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
+import 'package:pas_bisnis_2022/services/Notification.dart';
 import 'package:pas_bisnis_2022/view/DetailPage.dart';
 import 'package:pas_bisnis_2022/view/purchased.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class transaction extends StatefulWidget {
   transaction({Key? key, required this.data}) : super(key: key);
@@ -15,6 +22,13 @@ class transaction extends StatefulWidget {
 }
 
 class _transactionState extends State<transaction> {
+  int ship = 45000;
+  @override
+  void initState() {
+    super.initState();
+    Notif.initialize(flutterLocalNotificationsPlugin);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +47,7 @@ class _transactionState extends State<transaction> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text('Total Price : '),
-                      Text('Rp.' +
-                          (int.parse(widget.data.price.toString()) + 10000)
-                              .toString()),
+                      Text('Rp.' + widget.data.price.toString()),
                     ],
                   ),
                 ),
@@ -45,10 +57,28 @@ class _transactionState extends State<transaction> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text('Shipment : '),
-                      Text('Rp.' + 10000.toString()),
+                      Text('Rp.' + ship.toString()),
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 8,
+                ),
+                // price plus int ship equals
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Total : '),
+                      Text('Rp.' +
+                          (int.parse(ship.toString()) +
+                                  int.parse(widget.data.price.toString()))
+                              .toString()),
+                    ],
+                  ),
+                ),
+
                 // address
                 Container(
                   margin: const EdgeInsets.all(10),
@@ -91,10 +121,17 @@ class _transactionState extends State<transaction> {
                 ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => purchased(data: widget.data)),
-                      );
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => purchased(
+                                    data: widget.data,
+                                  )));
+                      Notif.showBigNotification(
+                          title: "Your order is confirmed",
+                          body: "wait for the " +
+                              widget.data.title.toString() +
+                              " to arrive",
+                          fln: flutterLocalNotificationsPlugin);
                     },
                     child: const Text('Buy Now')),
               ],
