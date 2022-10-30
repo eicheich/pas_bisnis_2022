@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:pas_bisnis_2022/services/Notification.dart';
+import 'package:pas_bisnis_2022/view/History.dart';
+import 'package:pas_bisnis_2022/view/Navigation.dart';
 
 class purchased extends StatefulWidget {
   purchased({Key? key, required this.data}) : super(key: key);
@@ -22,50 +24,22 @@ class _purchasedState extends State<purchased> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 20,
-          ),
-          const Text('Thank You For Purchasing'),
-          Image.network(widget.data.img1.toString()),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(widget.data.title.toString()),
-          const SizedBox(
-            height: 20,
-          ),
           Container(
-            margin: const EdgeInsets.all(10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            color: Colors.greenAccent,
+            child: Column(
               children: [
-                const Text('Total : '),
-                Text('Rp.' +
-                    (int.parse(ship.toString()) +
-                            int.parse(widget.data.price.toString()))
-                        .toString()),
+                const Text('gambar thx for purchasing '),
+                Text('yeah'),
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          Text('Your Order Will Be Delivered In 2 Days'),
-          const SizedBox(
-            height: 20,
-          ),
-          // button to see details
-          // ElevatedButton(
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => purchased(data: widget.data),
-          //       ),
-          //     );
-          //   },
-          //   child: const Text('See Details'),
-          // ),
+          // button to navigation
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Navigation()));
+              },
+              child: const Text('Back to Home')),
         ],
       )),
     );
