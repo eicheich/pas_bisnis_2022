@@ -84,7 +84,6 @@ class _HomeState extends State<Home> {
               );
             },
           ),
-          
         ],
       ),
       SliverList(
@@ -319,58 +318,38 @@ class _HomeState extends State<Home> {
       SliverPadding(
           padding: const EdgeInsets.all(10),
           sliver: SliverGrid.count(
-            crossAxisSpacing: 40,
-            mainAxisSpacing: 40,
-            crossAxisCount: 1,
-            children: <Widget>[
-              Container(
-                height: 100,
-                width: 100,
-                child: isloaded == true
-                    ? ListView.builder(
-                        itemCount: productModel!.data!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DetailPage(
-                                        data: productModel!.data![index])),
-                              );
-                            },
-                            child: Card(
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                        margin: EdgeInsets.only(right: 10),
-                                        width: 40,
-                                        height: 40,
-                                        child: Image.network(productModel!
-                                            .data![index].img1
-                                            .toString())),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(productModel!.data![index].title
-                                            .toString()),
-                                        Text('Rp.' +
-                                            productModel!.data![index].price
-                                                .toString()),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        })
-                    : Text("wait fuck"),
-              ),
-            ],
-          ))
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              crossAxisCount: 2,
+
+              // Generate 100 widgets that display their index in the List.
+              children: List.generate(17, (index) {
+                return Container(
+                  child: Card(
+                      child: Column(
+                    children: <Widget>[
+                      Container(
+                        height: 106,
+                        child: isloaded == true
+                            ? InkWell(
+                                child: Image.network(
+                                    productModel!.data![index].img1.toString()),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DetailPage(
+                                                data:
+                                                    productModel!.data![index],
+                                              )));
+                                },
+                              )
+                            : Text(""),
+                      ),
+                    ],
+                  )),
+                );
+              }))),
     ]));
   }
 }
