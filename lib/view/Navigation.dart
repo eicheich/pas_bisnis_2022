@@ -17,7 +17,7 @@ class _NavigationState extends State<Navigation> {
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
     Notif(),
-    History(),
+    history(),
     Profile(),
   ];
 

@@ -73,4 +73,18 @@ class Data {
     data['imgbrand'] = this.imgbrand;
     return data;
   }
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'desc': desc,
+      'price': price,
+      'brand': brand,
+      'rating': rating,
+      'sold': sold,
+      'img1': img1,
+      'img2': img2,
+      'imgbrand': imgbrand,
+    };
+  }
 }
