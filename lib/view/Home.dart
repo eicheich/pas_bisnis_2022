@@ -7,6 +7,7 @@ import 'package:pas_bisnis_2022/view/DetailPage.dart';
 import 'package:pas_bisnis_2022/view/ListBrand.dart';
 import 'package:pas_bisnis_2022/view/Cart.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:math' as math;
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -50,7 +51,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
         body: CustomScrollView(slivers: [
       SliverAppBar(
-        backgroundColor: Color(0xFF181713),
+        backgroundColor: Color(0xFF1E5128),
         floating: true,
         pinned: true,
         snap: false,
@@ -137,7 +138,7 @@ class _HomeState extends State<Home> {
             alignment: Alignment.center,
             height: 40,
             decoration: BoxDecoration(
-              color: Color(0xFF181713),
+              color: Color(0xFF1E5128),
             ),
             child: Container(
                 alignment: Alignment.center,
@@ -297,7 +298,7 @@ class _HomeState extends State<Home> {
                     Positioned.fill(
                         top: 40,
                         child: Text(
-                          '   For You',
+                          '   Trend For You',
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                               // make the font bold
@@ -318,22 +319,137 @@ class _HomeState extends State<Home> {
       SliverPadding(
           padding: const EdgeInsets.all(10),
           sliver: SliverGrid.count(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
               crossAxisCount: 2,
 
               // Generate 100 widgets that display their index in the List.
               children: List.generate(17, (index) {
                 return Container(
-                  child: Card(
-                      child: Column(
+                  child: Column(
                     children: <Widget>[
                       Container(
-                        height: 106,
+                        height: 167,
                         child: isloaded == true
                             ? InkWell(
-                                child: Image.network(
-                                    productModel!.data![index].img1.toString()),
+                                child: Card(
+                                  child: Container(
+                                    height: 167,
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Positioned.fill(
+                                            top: -100,
+                                            child: Image.network(
+                                              productModel!.data![index].img1
+                                                  .toString(),
+                                              fit: BoxFit.fitWidth,
+                                            )),
+                                        Positioned.fill(
+                                            top: 89,
+                                            child: Text(
+                                              '   ' +
+                                                  productModel!
+                                                      .data![index].title
+                                                      .toString(),
+                                              textAlign: TextAlign.justify,
+                                              style: TextStyle(
+                                                  // make the font bold
+
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                  fontFamily: 'Lexend',
+                                                  fontSize: 12,
+                                                  letterSpacing:
+                                                      0 /*percentages not used in flutter. defaulting to zero*/,
+                                                  fontWeight: FontWeight.bold,
+                                                  height: 1),
+                                            )),
+                                        Positioned.fill(
+                                          top: 96,
+                                          child: Text(
+                                            '\n    Rp.' +
+                                                productModel!.data![index].price
+                                                    .toString(),
+                                            textAlign: TextAlign.justify,
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 0, 0, 0),
+                                                fontFamily: 'Lexend',
+                                                fontSize: 10,
+                                                letterSpacing:
+                                                    0 /*percentages not used in flutter. defaulting to zero*/,
+                                                fontWeight: FontWeight.normal,
+                                                height: 1),
+                                          ),
+                                        ),
+                                        Positioned.fill(
+                                          top: 128,
+                                          left: 25,
+                                          child: Text(
+                                              productModel!.data![index].rating
+                                                  .toString(),
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                  fontFamily: 'Lexend',
+                                                  fontSize: 10,
+                                                  letterSpacing:
+                                                      0 /*percentages not used in flutter. defaulting to zero*/,
+                                                  fontWeight: FontWeight.normal,
+                                                  height: 1)),
+                                        ),
+                                        Positioned.fill(
+                                            top: 105,
+                                            left: 10,
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  scale: 2.5,
+                                                  image: AssetImage(
+                                                      'assets/images/star.png'),
+                                                  fit: BoxFit.none),
+                                            ))),
+                                        Positioned.fill(
+                                          top: 127,
+                                          left: 35,
+                                          child: Text('|',
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                  fontFamily: 'Lexend',
+                                                  fontSize: 10,
+                                                  letterSpacing:
+                                                      0 /*percentages not used in flutter. defaulting to zero*/,
+                                                  fontWeight: FontWeight.normal,
+                                                  height: 1)),
+                                        ),
+                                        Positioned.fill(
+                                          top: 128,
+                                          left: 40,
+                                          child: Text(
+                                              'Sold ' +
+                                                  productModel!
+                                                      .data![index].sold
+                                                      .toString(),
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                  fontFamily: 'Lexend',
+                                                  fontSize: 10,
+                                                  letterSpacing:
+                                                      0 /*percentages not used in flutter. defaulting to zero*/,
+                                                  fontWeight: FontWeight.normal,
+                                                  height: 1)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                                 onTap: () {
                                   Navigator.push(
                                       context,
@@ -347,7 +463,7 @@ class _HomeState extends State<Home> {
                             : Text(""),
                       ),
                     ],
-                  )),
+                  ),
                 );
               }))),
     ]));
