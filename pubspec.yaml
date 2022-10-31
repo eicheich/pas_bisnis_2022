@@ -69,6 +69,7 @@ flutter:
   assets:
   - assets/fonts/Lexend-Regular.ttf
   - assets/images/Ufee.png
+  - assets/images/star.png
   - assets/images/newin.png
   - assets/images/Disc.png
   - assets/images/home.png
