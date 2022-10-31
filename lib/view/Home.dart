@@ -390,8 +390,7 @@ class _HomeState extends State<Home> {
                                                   .toString(),
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 0, 0, 0),
+                                                  color: Color(0xFF909090),
                                                   fontFamily: 'Lexend',
                                                   fontSize: 10,
                                                   letterSpacing:
@@ -418,8 +417,7 @@ class _HomeState extends State<Home> {
                                           child: Text('|',
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 0, 0, 0),
+                                                  color: Color(0xFF909090),
                                                   fontFamily: 'Lexend',
                                                   fontSize: 10,
                                                   letterSpacing:
@@ -437,8 +435,7 @@ class _HomeState extends State<Home> {
                                                       .toString(),
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 0, 0, 0),
+                                                  color: Color(0xFF909090),
                                                   fontFamily: 'Lexend',
                                                   fontSize: 10,
                                                   letterSpacing:
