@@ -242,8 +242,8 @@ class _HomeState extends State<Home> {
                     : Text(""),
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => puma()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => puma()));
               },
             ),
             InkWell(
@@ -253,8 +253,8 @@ class _HomeState extends State<Home> {
                     : Text(""),
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => reebok()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => reebok()));
               },
             ),
             InkWell(
@@ -264,8 +264,8 @@ class _HomeState extends State<Home> {
                     : Text(""),
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => adidas()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => adidas()));
               },
             ),
             InkWell(
@@ -275,8 +275,8 @@ class _HomeState extends State<Home> {
                     : Text(""),
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => nike()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => nike()));
               },
             ),
             InkWell(
