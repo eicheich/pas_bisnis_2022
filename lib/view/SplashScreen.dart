@@ -17,26 +17,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
+      backgroundColor: Color(0xFF1B1B1B),
       splash: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-            colors: [
-              SharedCode().convertHex("AFC7AE"),
-              SharedCode().convertHex("FFFFFF"),
-              SharedCode().convertHex("FFFFFF"),
-              SharedCode().convertHex("FFFFFF"),
-              SharedCode().convertHex("FFFFFF"),
-            ],
-          ),
-        ),
-        child: Image.asset('assets/images/Ufee.png'),
+        // image
+        child: Image.asset('assets/images/Ufee.png', height: 114, width: 203),
       ),
       splashIconSize: 2000,
       nextScreen: Navigation(),
       splashTransition: SplashTransition.fadeTransition,
-      duration: 5000,
+      duration: 4000,
     );
   }
 }
