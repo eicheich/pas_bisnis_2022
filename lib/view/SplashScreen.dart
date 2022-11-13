@@ -21,7 +21,6 @@ class _SplashScreenState extends State<SplashScreen> {
       splash: Container(
         child: Image.asset('assets/images/Ufee.png', height: 114, width: 203),
       ),
-      splashIconSize: 2000,
       nextScreen: Navigation(),
       splashTransition: SplashTransition.fadeTransition,
       duration: 4000,
