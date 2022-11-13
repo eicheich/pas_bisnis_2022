@@ -149,9 +149,14 @@ class _AllCategoryState extends State<AllCategory> {
                 margin: EdgeInsets.only(left: 24, right: 24, top: 30),
                 child: Stack(
                   children: [
-                    InkWell(
-                      child: isloaded == true
-                          ? Container(
+                    Container(
+                      child: Stack(children: [
+                        Positioned(
+                            child: Container(
+                          child: InkWell(
+                            child: Container(
+                              height: 60,
+                              width: 60,
                               alignment: Alignment.topLeft,
                               margin: EdgeInsets.only(top: 27, left: 27),
                               child: Image.asset(
@@ -159,97 +164,118 @@ class _AllCategoryState extends State<AllCategory> {
                                 height: 60,
                                 width: 60,
                               ),
-                            )
-                          : Container(),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => adidas()));
-                      },
-                    ),
-                    InkWell(
-                      child: isloaded == true
-                          ? Container(
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => adidas()));
+                            },
+                          ),
+                        )),
+                        Positioned(
+                          child: Container(
                               alignment: Alignment.topCenter,
-                              margin: EdgeInsets.only(top: 27),
-                              child: Image.asset(
-                                "assets/images/Converse.png",
+                              child: InkWell(
+                                child: Container(
+                                  height: 60,
+                                  width: 60,
+                                  margin: EdgeInsets.only(
+                                    top: 27,
+                                  ),
+                                  child: Image.asset(
+                                    "assets/images/Converse.png",
+                                    height: 60,
+                                    width: 60,
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => converse()));
+                                },
+                              )),
+                        ),
+                        Positioned(
+                          child: Container(
+                            alignment: Alignment.topRight,
+                            child: InkWell(
+                              child: Container(
                                 height: 60,
                                 width: 60,
+                                margin: EdgeInsets.only(top: 27, right: 27),
+                                child: Image.asset(
+                                  "assets/images/Nike.png",
+                                  height: 60,
+                                ),
                               ),
-                            )
-                          : Container(),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => converse()));
-                      },
-                    ),
-                    InkWell(
-                      child: isloaded == true
-                          ? Container(
-                              alignment: Alignment.topRight,
-                              margin: EdgeInsets.only(top: 27, right: 27),
-                              child: Image.asset(
-                                "assets/images/Nike.png",
-                                height: 60,
-                              ),
-                            )
-                          : Container(),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => nike()));
-                      },
-                    ),
-                    InkWell(
-                      child: isloaded == true
-                          ? Container(
-                              alignment: Alignment.bottomLeft,
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => nike()));
+                              },
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                            child: Container(
+                          alignment: Alignment.bottomLeft,
+                          child: InkWell(
+                            child: Container(
                               margin: EdgeInsets.only(bottom: 27, left: 27),
                               child: Image.asset(
                                 "assets/images/NB.png",
                                 height: 60,
                               ),
-                            )
-                          : Container(),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => newbalance()));
-                      },
-                    ),
-                    InkWell(
-                      child: isloaded == true
-                          ? Container(
-                              alignment: Alignment.bottomCenter,
-                              margin: EdgeInsets.only(bottom: 27),
-                              child: Image.asset(
-                                "assets/images/Puma.png",
-                                height: 60,
-                              ),
-                            )
-                          : Container(),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => puma()));
-                      },
-                    ),
-                    InkWell(
-                      child: isloaded == true
-                          ? Container(
-                              alignment: Alignment.bottomRight,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => newbalance()));
+                            },
+                          ),
+                        )),
+                        Positioned(
+                            child: Container(
+                          alignment: Alignment.bottomCenter,
+                          child: InkWell(
+                            child: Container(
+                                margin: EdgeInsets.only(bottom: 27),
+                                child: Image.asset(
+                                  "assets/images/Puma.png",
+                                  height: 60,
+                                )),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => puma()));
+                            },
+                          ),
+                        )),
+                        Positioned(
+                            child: Container(
+                          alignment: Alignment.bottomRight,
+                          child: InkWell(
+                            child: Container(
                               margin: EdgeInsets.only(bottom: 27, right: 27),
                               child: Image.asset(
                                 "assets/images/Reebok.png",
                                 height: 60,
                               ),
-                            )
-                          : Container(),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => reebok()));
-                      },
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => reebok()));
+                            },
+                          ),
+                        ))
+                      ]),
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
