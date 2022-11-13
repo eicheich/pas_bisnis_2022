@@ -4,6 +4,7 @@ import 'package:pas_bisnis_2022/view/History.dart';
 import 'package:pas_bisnis_2022/view/Home.dart';
 import 'package:pas_bisnis_2022/view/Notif.dart';
 import 'package:pas_bisnis_2022/view/Profile.dart';
+import 'package:pas_bisnis_2022/view/Search.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _NavigationState extends State<Navigation> {
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
     Notif(),
-    History(),
+    history(),
     Profile(),
   ];
 

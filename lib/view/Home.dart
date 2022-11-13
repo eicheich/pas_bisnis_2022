@@ -1,5 +1,23 @@
+import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pas_bisnis_2022/model/ProductModel.dart';
+import 'package:http/http.dart' as http;
+import 'package:pas_bisnis_2022/view/AllCategory.dart';
+import 'package:pas_bisnis_2022/view/Categories/Adidas.dart';
+import 'package:pas_bisnis_2022/view/Categories/NewBalane.dart';
+import 'package:pas_bisnis_2022/view/Categories/Nike.dart';
+import 'package:pas_bisnis_2022/view/Categories/Puma.dart';
+import 'package:pas_bisnis_2022/view/Categories/Reebok.dart';
+import 'package:pas_bisnis_2022/view/DetailPage.dart';
+import 'package:pas_bisnis_2022/view/Categories/Converse.dart';
+import 'package:pas_bisnis_2022/view/Cart.dart';
+import 'package:pas_bisnis_2022/view/MenCategory.dart';
+import 'package:pas_bisnis_2022/view/Search.dart';
+import 'package:pas_bisnis_2022/view/WomenCategory.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:math' as math;
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -8,124 +26,141 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  late TabController _controller;
+  int _selectedIndex = 0;
+
+  ProductModel? productModel;
+  bool isloaded = true;
+
+  List<Widget> list = [
+    Tab(icon: Text("All")),
+    Tab(icon: Text("Men")),
+    Tab(icon: Text("Women")),
+  ];
+
+  void getAllListPL() async {
+    setState(() {
+      isloaded = false;
+    });
+    final res = await http.get(
+      Uri.parse("https://api-shoestore.000webhostapp.com/data.php"),
+    );
+
+    print("status code " + res.statusCode.toString());
+    productModel = ProductModel.fromJson(json.decode(res.body.toString()));
+    print("team 0 : " + productModel!.data![0].brand.toString());
+    setState(() {
+      isloaded = true;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAllListPL();
+    _controller = TabController(length: list.length, vsync: this);
+
+    _controller.addListener(() {
+      setState(() {
+        _selectedIndex = _controller.index;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 50, left: 0, right: 0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: TextField(
-                    cursorColor: Colors.grey,
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: OutlineInputBorder(
-                          // borderRadius: BorderRadius.circular(10),
-                          //   borderSide: BorderSide(
-                          //     color: Colors.grey,
-                          //     width: 1,
-                          //   ),
-
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide.none),
-                      hintText: 'Search',
-                      hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
-                      prefixIcon: Icon(
-                        CupertinoIcons.search,
-                        color: Color.fromARGB(255, 162, 162, 162),
-                        size: 24.0,
-                        semanticLabel:
-                            'Text to announce in accessibility modes',
+      body: DefaultTabController(
+        length: 3,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                elevation: 0,
+                collapsedHeight: 60,
+                backgroundColor: Colors.white,
+                floating: true,
+                snap: true,
+                pinned: true,
+                title: Container(
+                  margin: EdgeInsets.only(left: 5, right: 0),
+                  child: Text(
+                    "Home",
+                    style: TextStyle(
+                        fontFamily: "Lexend",
+                        color: Color(0xFF1B1B1B),
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal),
+                  ),
+                ),
+                actions: [
+                  Container(
+                    child: IconButton(
+                      icon: Image.asset(
+                        "assets/images/Search.png",
+                        color: Color(0xFF1B1B1B),
+                        height: 22,
                       ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Search()),
+                        );
+                      },
                     ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 10),
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Icon(
-                    CupertinoIcons.cart,
-                    color: Color.fromARGB(255, 162, 162, 162),
-                    size: 24.0,
-                    semanticLabel: 'Text to announce in accessibility modes',
+                  Container(
+                    padding: EdgeInsets.only(right: 5),
+                    child: IconButton(
+                      icon: Image.asset(
+                        "assets/images/shop.png",
+                        color: Color(0xFF1B1B1B),
+                        height: 26,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => cart()),
+                        );
+                      },
+                    ),
                   ),
+                ],
+              ),
+              SliverPadding(
+                padding: new EdgeInsets.only(left: 5),
+                sliver: new SliverList(
+                  delegate: new SliverChildListDelegate([
+                    Container(
+                      color: Colors.white,
+                      child: TabBar(
+                        indicatorPadding: EdgeInsets.symmetric(vertical: 2),
+                        indicatorColor: Color(0xFF1B1B1B),
+                        indicatorSize: TabBarIndicatorSize.label,
+                        isScrollable: true,
+                        labelColor: Color(0xFF1B1B1B),
+                        labelStyle:
+                            TextStyle(fontFamily: "Lexend", fontSize: 17.5),
+                        unselectedLabelColor:
+                            Color(0xFF1B1B1B).withOpacity(0.65),
+                        controller: _controller,
+                        tabs: list,
+                      ),
+                    ),
+                  ]),
                 ),
-              ],
-            ),
-            Container(
-                width: 320,
-                height: 515,
-                child: Stack(children: <Widget>[
-                  Positioned(
-                      top: 0,
-                      left: 0,
-                      child: Container(
-                          width: 320,
-                          height: 515,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image:
-                                    AssetImage('assets/images/New arrival.png'),
-                                fit: BoxFit.fitWidth),
-                          ))),
-                ])),
-            Container(
-                width: 390,
-                height: 45,
-                child: Stack(children: <Widget>[
-                  Positioned(
-                      top: 0,
-                      left: 0,
-                      child: Container(
-                          width: 390,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            color: Color.fromRGBO(0, 0, 0, 1),
-                          ))),
-                  Positioned(
-                      top: 12,
-                      left: 79,
-                      child: Text(
-                        'Try it and free returns',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                            fontFamily: 'Lexend',
-                            fontSize: 17,
-                            letterSpacing:
-                                0 /*percentages not used in flutter. defaulting to zero*/,
-                            fontWeight: FontWeight.normal,
-                            height: 1),
-                      )),
-                ])),
-            Container(
-                padding: EdgeInsets.only(top: 20),
-                width: 390,
-                height: 287,
-                child: Stack(children: <Widget>[
-                  Positioned(
-                      top: 0,
-                      left: 0,
-                      child: Container(
-                          width: 390,
-                          height: 287,
-                          decoration: BoxDecoration(
-                            color: Color.fromRGBO(217, 217, 217, 1),
-                            image: DecorationImage(
-                                image: AssetImage('assets/images/Promo.png'),
-                                fit: BoxFit.fitWidth),
-                          ))),
-                ]))
-          ],
+              ),
+            ];
+          },
+          body: TabBarView(
+            controller: _controller,
+            children: [
+              AllCategory(),
+              MenCategory(),
+              WomenCategory(),
+            ],
+          ),
         ),
       ),
     );
