@@ -14,6 +14,7 @@ import 'package:pas_bisnis_2022/view/DetailPage.dart';
 import 'package:pas_bisnis_2022/view/Categories/Converse.dart';
 import 'package:pas_bisnis_2022/view/Cart.dart';
 import 'package:pas_bisnis_2022/view/MenCategory.dart';
+import 'package:pas_bisnis_2022/view/Search.dart';
 import 'package:pas_bisnis_2022/view/WomenCategory.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math' as math;
@@ -104,7 +105,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => cart()),
+                          MaterialPageRoute(builder: (context) => Search()),
                         );
                       },
                     ),
