@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/shared/hexConvert.dart';
 import 'package:pas_bisnis_2022/view/History.dart';
@@ -35,55 +36,47 @@ class _NavigationState extends State<Navigation> {
         child: _widgetOptions.elementAt(_selectedNavbar),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: ImageIcon(
-              AssetImage('assets/images/home.png'),
+              AssetImage('assets/images/homeOutline.png'),
             ),
             activeIcon: ImageIcon(
-              AssetImage('assets/images/home.png'),
+              AssetImage('assets/images/homeFill.png'),
             ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage(
-                'assets/images/shop.png',
-              ),
-            ),
-            activeIcon: ImageIcon(
-              AssetImage('assets/images/shop.png'),
-            ),
-            label: 'Shop',
+            icon: Icon(CupertinoIcons.bell),
+            activeIcon: Icon(CupertinoIcons.bell_fill),
+            label: 'Notification',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
-              AssetImage('assets/images/history.png'),
+              AssetImage('assets/images/clockOutline.png'),
             ),
             activeIcon: ImageIcon(
-              AssetImage('assets/images/history.png'),
+              AssetImage('assets/images/clockFill.png'),
             ),
             label: 'History',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(
-              AssetImage('assets/images/user.png'),
+              AssetImage('assets/images/userOutline.png'),
             ),
             activeIcon: ImageIcon(
-              AssetImage('assets/images/user.png'),
+              AssetImage('assets/images/userFill.png'),
             ),
             label: 'Profile',
           ),
         ],
         currentIndex: _selectedNavbar,
-        iconSize: 24,
-        selectedItemColor: Color(0xFF1E5128),
-        unselectedItemColor: Color(0xFF2B2D42),
-        showUnselectedLabels: true,
-        selectedLabelStyle: TextStyle(
-            fontFamily: "Lexend", fontWeight: FontWeight.w600, fontSize: 12),
-        unselectedLabelStyle: TextStyle(
-            fontFamily: "Lexend", fontWeight: FontWeight.w600, fontSize: 12),
+        iconSize: 27,
+        selectedItemColor: Color(0xFF1B1B1B),
+        unselectedItemColor: Color(0xFF1B1B1B),
         onTap: _changeSelectedNavBar,
       ),
     );
