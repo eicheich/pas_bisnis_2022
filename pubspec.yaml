@@ -73,14 +73,13 @@ flutter:
   - assets/images/star.png
   - assets/images/newin.png
   - assets/images/Disc.png
-  - assets/images/home.png
-  - assets/images/selectedHome.png
+  - assets/images/homeFill.png
+  - assets/images/homeOutline.png
+  - assets/images/clockOutline.png
+  - assets/images/clockFill.png
   - assets/images/shop.png
-  - assets/images/selectedShop.png
-  - assets/images/history.png
-  - assets/images/selectedHistory.png
-  - assets/images/user.png
-  - assets/images/selectedUser.png
+  - assets/images/userFill.png
+  - assets/images/userOutline.png
   - assets/images/Adidas.png
   - assets/images/Converse.png
   - assets/images/NB.png
