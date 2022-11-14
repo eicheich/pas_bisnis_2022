@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return AnimatedSplashScreen(
       backgroundColor: Color(0xFF1B1B1B),
       splash: Container(
-        child: Image.asset('assets/images/Ufee.png', height: 114, width: 203),
+        child: Image.asset('assets/images/Logo.png', height: 114, width: 203),
       ),
       nextScreen: Navigation(),
       splashTransition: SplashTransition.fadeTransition,
