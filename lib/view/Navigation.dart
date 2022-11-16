@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pas_bisnis_2022/shared/hexConvert.dart';
+import 'package:pas_bisnis_2022/shared/Share.dart';
 import 'package:pas_bisnis_2022/view/History.dart';
 import 'package:pas_bisnis_2022/view/Home.dart';
 import 'package:pas_bisnis_2022/view/Notif.dart';
