@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
+import 'package:pas_bisnis_2022/shared/Share.dart';
 import 'package:pas_bisnis_2022/view/Categories/Adidas.dart';
 import 'package:pas_bisnis_2022/view/Categories/Converse.dart';
 import 'package:http/http.dart' as http;
@@ -327,7 +328,7 @@ class _AllCategoryState extends State<AllCategory> {
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 24,
-                          mainAxisSpacing: 13,
+                          mainAxisSpacing: 20,
                           // childAspectRatio: 0.5,
                           mainAxisExtent: 238,
                         ),
@@ -381,7 +382,7 @@ class _AllCategoryState extends State<AllCategory> {
                                     ),
                                   ),
                                   Container(
-                                    margin: EdgeInsets.only(top: 7),
+                                    margin: EdgeInsets.only(top: 5),
                                     child: Text(
                                       'Rp. ${productModel!.data![index].price.toString()}',
                                       style: TextStyle(
@@ -399,7 +400,30 @@ class _AllCategoryState extends State<AllCategory> {
                           );
                         },
                       )
-                    : Container(),
+                    : GridView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 17,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 24,
+                          mainAxisSpacing: 13,
+                          mainAxisExtent: 251,
+                        ),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailPage(
+                                              data: productModel!.data![index],
+                                            )));
+                              },
+                              child: SharedCode().placeholder());
+                        },
+                      ),
               )
             ],
           ),
