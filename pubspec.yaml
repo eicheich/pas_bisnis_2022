@@ -41,13 +41,17 @@ dependencies:
   flutter_local_notifications: ^12.0.3
   path_provider:
   readmore: ^2.1.0
+  firebase_auth:
+  provider:
+  firebase_core:
+  google_sign_in:
 
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  
+
   flutter_launcher_icons: "^0.10.0"
 
 flutter_icons:
