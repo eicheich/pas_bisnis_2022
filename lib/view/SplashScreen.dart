@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:pas_bisnis_2022/services/Wrapper.dart';
 import 'package:pas_bisnis_2022/view/Login.dart';
 import 'package:pas_bisnis_2022/view/Navigation.dart';
 import 'package:page_transition/page_transition.dart';
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
         // image
         child: Image.asset('assets/images/Logo.png', height: 114, width: 203),
       ),
-      nextScreen: Login(),
+      nextScreen: Wrapper(),
       splashTransition: SplashTransition.fadeTransition,
       duration: 4000,
     );
