@@ -106,4 +106,51 @@ class SharedCode {
         color: color,
         fontWeight: fontWeight);
   }
+
+  Widget textFieldUi(String Labeltext, bool obscureText) {
+    return Stack(
+      children: [
+        Container(
+          margin: EdgeInsets.only(left: 3, top: 3),
+          alignment: Alignment.topLeft,
+          height: 60,
+          color: Color.fromRGBO(24, 23, 19, 1),
+        ),
+        Container(
+          padding: EdgeInsets.only(left: 19),
+          child: TextField(
+            obscureText: obscureText,
+            decoration: InputDecoration(
+              labelText: Labeltext,
+              labelStyle: TextStyle(
+                  fontFamily: "Lexend",
+                  fontSize: 19,
+                  color: Color(0xFF1B1B1B).withOpacity(0.65),
+                  fontWeight: FontWeight.normal),
+              enabledBorder: UnderlineInputBorder(
+                borderSide:
+                    BorderSide(color: Color(0xFF1B1B1B).withOpacity(0.65)),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide:
+                    BorderSide(color: Color(0xFF1B1B1B).withOpacity(0.65)),
+              ),
+            ),
+          ),
+          margin: EdgeInsets.only(
+            right: 3,
+          ),
+          alignment: Alignment.bottomRight,
+          height: 60,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Color.fromRGBO(24, 23, 19, 1),
+              width: 1,
+            ),
+            color: Color.fromRGBO(255, 255, 255, 1),
+          ),
+        ),
+      ],
+    );
+  }
 }

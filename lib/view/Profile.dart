@@ -20,7 +20,29 @@ class _ProfileState extends State<Profile> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Profile'),
+            StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.userChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text('signed in ${snapshot.data?.uid}');
+                } else {
+                  return const Text('No User');
+                }
+              },
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (FirebaseAuth.instance.currentUser == null) {
+                  FirebaseAuth.instance.signInAnonymously();
+                } else {
+                  FirebaseAuth.instance.signOut();
+                }
+              },
+              child: Text('logout')
+            )
           ],
         ),
       ),
