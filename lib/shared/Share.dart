@@ -153,4 +153,45 @@ class SharedCode {
       ],
     );
   }
+
+  Widget buttonUi(String buttonText) {
+    return Stack(
+      children: [
+        Container(
+          margin: EdgeInsets.only(left: 4, top: 4),
+          alignment: Alignment.center,
+          height: 60,
+          width: 190,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Color.fromRGBO(24, 23, 19, 1),
+              width: 1.5,
+            ),
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+        ),
+        GestureDetector(
+          child: Container(
+            alignment: Alignment.center,
+            height: 60,
+            width: 190,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 24, 23, 19),
+            ),
+            child: new Text(
+              buttonText,
+              style: TextStyle(
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                  fontFamily: 'Lexend',
+                  fontSize: 20,
+                  letterSpacing:
+                      0 /*percentages not used in flutter. defaulting to zero*/,
+                  fontWeight: FontWeight.normal,
+                  height: 1),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
