@@ -77,6 +77,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 bottom: TabBar(
                   padding: EdgeInsets.only(right: 165),
                   indicatorPadding: EdgeInsets.symmetric(vertical: 2),
