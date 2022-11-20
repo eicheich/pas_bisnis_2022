@@ -113,7 +113,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(
-              height: 135,
+              height: 120,
             ),
             InkWell(
               onTap: () {
@@ -121,7 +121,30 @@ class _LoginState extends State<Login> {
                     MaterialPageRoute(builder: (context) => Navigation()));
               },
               child: SharedCode().buttonUi('Login'),
-            )
+            ),
+
+            SizedBox(
+              height: 22,
+            ),
+
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => cart()));
+              },
+              child: new Text(
+                'Skip for now',
+                style: TextStyle(
+                    // decoration: TextDecoration.underline,
+                    color: Color.fromRGBO(24, 23, 19, 0.800000011920929),
+                    fontFamily: 'Lexend',
+                    fontSize: 16,
+                    letterSpacing:
+                        0 /*percentages not used in flutter. defaulting to zero*/,
+                    fontWeight: FontWeight.normal,
+                    height: 1),
+              ),
+            ),
 
             //  INI ENGINE SKIP FOR NOW
             // ElevatedButton(
