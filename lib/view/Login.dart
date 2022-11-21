@@ -84,7 +84,7 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 22,
             ),
-            SharedCode().textFieldUi('Username', false),
+            SharedCode().textFieldUi('Email', false),
             SizedBox(
               height: 22,
             ),
