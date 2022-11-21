@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pas_bisnis_2022/view/Login.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -34,15 +35,12 @@ class _ProfileState extends State<Profile> {
               height: 100,
             ),
             ElevatedButton(
-              onPressed: () {
-                if (FirebaseAuth.instance.currentUser == null) {
-                  FirebaseAuth.instance.signInAnonymously();
-                } else {
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Login()));
                   FirebaseAuth.instance.signOut();
-                }
-              },
-              child: Text('logout')
-            )
+                },
+                child: Text('logout'))
           ],
         ),
       ),
