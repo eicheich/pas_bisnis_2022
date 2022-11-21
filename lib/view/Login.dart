@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:pas_bisnis_2022/shared/Share.dart';
 import 'package:pas_bisnis_2022/view/Cart.dart';
 import 'package:pas_bisnis_2022/view/Navigation.dart';
+import 'package:pas_bisnis_2022/view/Register.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class _LoginState extends State<Login> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => cart()));
+                                    builder: (context) => Register()));
                           },
                           child: new Text(
                             'Join Us',
