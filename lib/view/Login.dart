@@ -129,8 +129,9 @@ class _LoginState extends State<Login> {
 
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => cart()));
+                FirebaseAuth.instance.signInAnonymously();
+                // Navigator.push(
+                //     context, MaterialPageRoute(builder: (context) => cart()));
               },
               child: new Text(
                 'Skip for now',
@@ -150,7 +151,7 @@ class _LoginState extends State<Login> {
             // ElevatedButton(
             //     onPressed: () {
             //       // login as annymous firebase
-            //       FirebaseAuth.instance.signInAnonymously();
+            // FirebaseAuth.instance.signInAnonymously();
             //     },
             //     child: Text('Skip for now'))
           ],
