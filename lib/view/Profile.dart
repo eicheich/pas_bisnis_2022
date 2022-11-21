@@ -25,7 +25,7 @@ class _ProfileState extends State<Profile> {
               stream: FirebaseAuth.instance.userChanges(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text('signed in ${snapshot.data?.uid}');
+                  return Text('signed in ${snapshot.data?.email}');
                 } else {
                   return const Text('No User');
                 }

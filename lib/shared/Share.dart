@@ -119,6 +119,7 @@ class SharedCode {
         Container(
           padding: EdgeInsets.only(left: 19),
           child: TextField(
+            // controller: controllerTF,
             obscureText: obscureText,
             decoration: InputDecoration(
               labelText: Labeltext,

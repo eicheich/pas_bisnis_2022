@@ -13,6 +13,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,15 +63,108 @@ class _RegisterState extends State<Register> {
           SizedBox(
             height: 22,
           ),
-          SharedCode().textFieldUi('Username', false),
+          SharedCode().textFieldUi(
+            'Username',
+            false,
+          ),
           SizedBox(
             height: 22,
           ),
-          SharedCode().textFieldUi('Email', false),
+          Stack(
+            children: [
+              Container(
+                margin: EdgeInsets.only(left: 3, top: 3),
+                alignment: Alignment.topLeft,
+                height: 60,
+                color: Color.fromRGBO(24, 23, 19, 1),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 19),
+                child: TextField(
+                  controller: _emailController,
+                  // controller: controllerTF,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
+                        fontFamily: "Lexend",
+                        fontSize: 19,
+                        color: Color(0xFF1B1B1B).withOpacity(0.65),
+                        fontWeight: FontWeight.normal),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Color(0xFF1B1B1B).withOpacity(0.65)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Color(0xFF1B1B1B).withOpacity(0.65)),
+                    ),
+                  ),
+                ),
+                margin: EdgeInsets.only(
+                  right: 3,
+                ),
+                alignment: Alignment.bottomRight,
+                height: 60,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromRGBO(24, 23, 19, 1),
+                    width: 1,
+                  ),
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                ),
+              ),
+            ],
+          ),
           SizedBox(
             height: 22,
           ),
-          SharedCode().textFieldUi('Password', true),
+          Stack(
+            children: [
+              Container(
+                margin: EdgeInsets.only(left: 3, top: 3),
+                alignment: Alignment.topLeft,
+                height: 60,
+                color: Color.fromRGBO(24, 23, 19, 1),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 19),
+                child: TextField(
+                  controller: _passwordController,
+                  // controller: controllerTF,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(
+                        fontFamily: "Lexend",
+                        fontSize: 19,
+                        color: Color(0xFF1B1B1B).withOpacity(0.65),
+                        fontWeight: FontWeight.normal),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Color(0xFF1B1B1B).withOpacity(0.65)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Color(0xFF1B1B1B).withOpacity(0.65)),
+                    ),
+                  ),
+                ),
+                margin: EdgeInsets.only(
+                  right: 3,
+                ),
+                alignment: Alignment.bottomRight,
+                height: 60,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromRGBO(24, 23, 19, 1),
+                    width: 1,
+                  ),
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                ),
+              ),
+            ],
+          ),
           SizedBox(
             height: 22,
           ),
@@ -111,9 +206,13 @@ class _RegisterState extends State<Register> {
             height: 73,
           ),
           InkWell(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Navigation()));
+            onTap: () async {
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                  email: _emailController.text,
+                  password: _passwordController.text);
+
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Login()));
             },
             child: SharedCode().buttonUi('Join Us'),
           ),
