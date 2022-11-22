@@ -107,7 +107,8 @@ class SharedCode {
         fontWeight: fontWeight);
   }
 
-  Widget textFieldUi(String Labeltext, bool obscureText) {
+  Widget textFieldUi(
+      String Labeltext, bool obscureText, TextEditingController controllerTF) {
     return Stack(
       children: [
         Container(
@@ -119,7 +120,7 @@ class SharedCode {
         Container(
           padding: EdgeInsets.only(left: 19),
           child: TextField(
-            // controller: controllerTF,
+            controller: controllerTF,
             obscureText: obscureText,
             decoration: InputDecoration(
               labelText: Labeltext,

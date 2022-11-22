@@ -15,6 +15,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _usernameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,108 +64,15 @@ class _RegisterState extends State<Register> {
           SizedBox(
             height: 22,
           ),
-          SharedCode().textFieldUi(
-            'Username',
-            false,
-          ),
+          SharedCode().textFieldUi('Username', false, _usernameController),
           SizedBox(
             height: 22,
           ),
-          Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 3, top: 3),
-                alignment: Alignment.topLeft,
-                height: 60,
-                color: Color.fromRGBO(24, 23, 19, 1),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 19),
-                child: TextField(
-                  controller: _emailController,
-                  // controller: controllerTF,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(
-                        fontFamily: "Lexend",
-                        fontSize: 19,
-                        color: Color(0xFF1B1B1B).withOpacity(0.65),
-                        fontWeight: FontWeight.normal),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color(0xFF1B1B1B).withOpacity(0.65)),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color(0xFF1B1B1B).withOpacity(0.65)),
-                    ),
-                  ),
-                ),
-                margin: EdgeInsets.only(
-                  right: 3,
-                ),
-                alignment: Alignment.bottomRight,
-                height: 60,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromRGBO(24, 23, 19, 1),
-                    width: 1,
-                  ),
-                  color: Color.fromRGBO(255, 255, 255, 1),
-                ),
-              ),
-            ],
-          ),
+          SharedCode().textFieldUi('Email', false, _emailController),
           SizedBox(
             height: 22,
           ),
-          Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 3, top: 3),
-                alignment: Alignment.topLeft,
-                height: 60,
-                color: Color.fromRGBO(24, 23, 19, 1),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 19),
-                child: TextField(
-                  controller: _passwordController,
-                  // controller: controllerTF,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(
-                        fontFamily: "Lexend",
-                        fontSize: 19,
-                        color: Color(0xFF1B1B1B).withOpacity(0.65),
-                        fontWeight: FontWeight.normal),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color(0xFF1B1B1B).withOpacity(0.65)),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color(0xFF1B1B1B).withOpacity(0.65)),
-                    ),
-                  ),
-                ),
-                margin: EdgeInsets.only(
-                  right: 3,
-                ),
-                alignment: Alignment.bottomRight,
-                height: 60,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromRGBO(24, 23, 19, 1),
-                    width: 1,
-                  ),
-                  color: Color.fromRGBO(255, 255, 255, 1),
-                ),
-              ),
-            ],
-          ),
+          SharedCode().textFieldUi('Password', true, _passwordController),
           SizedBox(
             height: 22,
           ),
@@ -177,8 +85,7 @@ class _RegisterState extends State<Register> {
                     color: Color.fromRGBO(24, 23, 19, 0.800000011920929),
                     fontFamily: 'Lexend',
                     fontSize: 16,
-                    letterSpacing:
-                        0 /*percentages not used in flutter. defaulting to zero*/,
+                    letterSpacing: 0,
                     fontWeight: FontWeight.normal,
                     height: 1),
               ),
