@@ -45,6 +45,7 @@ dependencies:
   provider:
   firebase_core:
   google_sign_in:
+  carousel_slider: ^4.1.1
 
 
 
