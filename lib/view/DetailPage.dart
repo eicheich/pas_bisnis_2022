@@ -270,8 +270,9 @@ class _DetailPageState extends State<DetailPage> {
                         child: Text(
                           "Rp. " + widget.data.price!,
                           style: TextStyle(
-                            fontFamily: "Lexend",
+                            fontFamily: "Poppins",
                             fontSize: 20,
+                            fontWeight: FontWeight.w500,
                             color: Color(0xFF1B1B1B),
                           ),
                         ),
@@ -464,7 +465,7 @@ class _DetailPageState extends State<DetailPage> {
                   Container(
                     margin: EdgeInsets.only(top: 40),
                     child: Text(
-                      "Similar Product",
+                      "Shoes of the Week",
                       style: SharedCode().textStyle(
                           "Lexend", 24, Color(0xFF1B1B1B), FontWeight.w500),
                     ),
