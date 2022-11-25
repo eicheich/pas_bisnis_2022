@@ -103,6 +103,14 @@ flutter:
   - assets/images/bagFill.png
   - assets/images/bagOutline.png
   - assets/images/delivery.png
+  - assets/images/account.png
+  - assets/images/address.png
+  - assets/images/information.png
+  - assets/images/language.png
+  - assets/images/logout.png
+  - assets/images/notification.png
+  - assets/images/shield.png
+  - assets/images/terms.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
