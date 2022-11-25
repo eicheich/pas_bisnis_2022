@@ -3,6 +3,7 @@ import 'package:pas_bisnis_2022/view/DetailPage.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:pas_bisnis_2022/shared/Share.dart';
 
 class MenCategory extends StatefulWidget {
   const MenCategory({Key? key}) : super(key: key);
@@ -43,7 +44,8 @@ class _MenCategoryState extends State<MenCategory> {
         ? Scaffold(
             body: SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.only(top: 18),
+                margin:
+                    EdgeInsets.only(top: 18, bottom: 30, left: 30, right: 30),
                 child: Column(
                   children: [
                     Row(
@@ -57,56 +59,11 @@ class _MenCategoryState extends State<MenCategory> {
                                       DetailPage(data: productModel!.data![0])),
                             );
                           },
-                          child: Container(
-                            width: 159,
-                            margin: EdgeInsets.only(left: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Image.network(
-                                    productModel!.data![0].img1!,
-                                    height: 159,
-                                    width: 159,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    productModel!.data![0].title!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "Sold " + productModel!.data![0].sold!,
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Rp. " + productModel!.data![0].price!,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: SharedCode().productUi(
+                              productModel!.data![0].img1!,
+                              productModel!.data![0].title!,
+                              productModel!.data![0].sold!,
+                              productModel!.data![0].price!),
                         ),
                         Spacer(),
                         InkWell(
@@ -118,58 +75,16 @@ class _MenCategoryState extends State<MenCategory> {
                                       DetailPage(data: productModel!.data![3])),
                             );
                           },
-                          child: Container(
-                            width: 159,
-                            margin: EdgeInsets.only(right: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Image.network(
-                                    productModel!.data![3].img1!,
-                                    height: 159,
-                                    width: 159,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    productModel!.data![3].title!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "Sold " + productModel!.data![3].sold!,
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Rp. " + productModel!.data![3].price!,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: SharedCode().productUi(
+                              productModel!.data![3].img1!,
+                              productModel!.data![3].title!,
+                              productModel!.data![3].sold!,
+                              productModel!.data![3].price!),
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 13,
                     ),
                     Row(
                       children: [
@@ -182,56 +97,11 @@ class _MenCategoryState extends State<MenCategory> {
                                       DetailPage(data: productModel!.data![4])),
                             );
                           },
-                          child: Container(
-                            width: 159,
-                            margin: EdgeInsets.only(left: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Image.network(
-                                    productModel!.data![4].img1!,
-                                    height: 159,
-                                    width: 159,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    productModel!.data![4].title!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "Sold " + productModel!.data![4].sold!,
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Rp. " + productModel!.data![4].price!,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: SharedCode().productUi(
+                              productModel!.data![4].img1!,
+                              productModel!.data![4].title!,
+                              productModel!.data![4].sold!,
+                              productModel!.data![4].price!),
                         ),
                         Spacer(),
                         InkWell(
@@ -243,56 +113,11 @@ class _MenCategoryState extends State<MenCategory> {
                                       DetailPage(data: productModel!.data![6])),
                             );
                           },
-                          child: Container(
-                            width: 159,
-                            margin: EdgeInsets.only(right: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Image.network(
-                                    productModel!.data![6].img1!,
-                                    height: 159,
-                                    width: 159,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    productModel!.data![6].title!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "Sold " + productModel!.data![6].sold!,
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Rp. " + productModel!.data![6].price!,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: SharedCode().productUi(
+                              productModel!.data![6].img1!,
+                              productModel!.data![6].title!,
+                              productModel!.data![6].sold!,
+                              productModel!.data![6].price!),
                         ),
                       ],
                     ),
@@ -307,56 +132,11 @@ class _MenCategoryState extends State<MenCategory> {
                                       DetailPage(data: productModel!.data![8])),
                             );
                           },
-                          child: Container(
-                            width: 159,
-                            margin: EdgeInsets.only(left: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Image.network(
-                                    productModel!.data![8].img1!,
-                                    height: 159,
-                                    width: 159,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    productModel!.data![8].title!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "Sold " + productModel!.data![8].sold!,
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Rp. " + productModel!.data![8].price!,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: SharedCode().productUi(
+                              productModel!.data![8].img1!,
+                              productModel!.data![8].title!,
+                              productModel!.data![8].sold!,
+                              productModel!.data![8].price!),
                         ),
                         Spacer(),
                         InkWell(
@@ -368,56 +148,11 @@ class _MenCategoryState extends State<MenCategory> {
                                       DetailPage(data: productModel!.data![9])),
                             );
                           },
-                          child: Container(
-                            width: 159,
-                            margin: EdgeInsets.only(right: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Image.network(
-                                    productModel!.data![9].img1!,
-                                    height: 159,
-                                    width: 159,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    productModel!.data![9].title!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "Sold " + productModel!.data![9].sold!,
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Rp. " + productModel!.data![9].price!,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: SharedCode().productUi(
+                              productModel!.data![9].img1!,
+                              productModel!.data![9].title!,
+                              productModel!.data![9].sold!,
+                              productModel!.data![9].price!),
                         ),
                       ],
                     ),
@@ -432,56 +167,11 @@ class _MenCategoryState extends State<MenCategory> {
                                       data: productModel!.data![10])),
                             );
                           },
-                          child: Container(
-                            width: 159,
-                            margin: EdgeInsets.only(left: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Image.network(
-                                    productModel!.data![10].img1!,
-                                    height: 159,
-                                    width: 159,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    productModel!.data![10].title!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "Sold " + productModel!.data![10].sold!,
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Rp. " + productModel!.data![10].price!,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: SharedCode().productUi(
+                              productModel!.data![10].img1!,
+                              productModel!.data![10].title!,
+                              productModel!.data![10].sold!,
+                              productModel!.data![10].price!),
                         ),
                         Spacer(),
                         InkWell(
@@ -493,56 +183,11 @@ class _MenCategoryState extends State<MenCategory> {
                                       data: productModel!.data![12])),
                             );
                           },
-                          child: Container(
-                            width: 159,
-                            margin: EdgeInsets.only(right: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Image.network(
-                                    productModel!.data![12].img1!,
-                                    height: 159,
-                                    width: 159,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    productModel!.data![12].title!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "Sold " + productModel!.data![12].sold!,
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Rp. " + productModel!.data![12].price!,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: SharedCode().productUi(
+                              productModel!.data![12].img1!,
+                              productModel!.data![12].title!,
+                              productModel!.data![12].sold!,
+                              productModel!.data![12].price!),
                         ),
                       ],
                     ),
@@ -557,56 +202,11 @@ class _MenCategoryState extends State<MenCategory> {
                                       data: productModel!.data![14])),
                             );
                           },
-                          child: Container(
-                            width: 159,
-                            margin: EdgeInsets.only(left: 30),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Image.network(
-                                    productModel!.data![14].img1!,
-                                    height: 159,
-                                    width: 159,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    productModel!.data![14].title!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    "Sold " + productModel!.data![14].sold!,
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontFamily: "Lexend",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Rp. " + productModel!.data![14].price!,
-                                    style: TextStyle(
-                                        color: Color(0xFF1B1B1B),
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: SharedCode().productUi(
+                              productModel!.data![14].img1!,
+                              productModel!.data![14].title!,
+                              productModel!.data![14].sold!,
+                              productModel!.data![14].price!),
                         ),
                       ],
                     ),
@@ -615,6 +215,134 @@ class _MenCategoryState extends State<MenCategory> {
               ),
             ),
           )
-        : Container();
+        : Scaffold(
+            body: SingleChildScrollView(
+              child: Container(
+                margin:
+                    EdgeInsets.only(top: 18, bottom: 30, left: 30, right: 30),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        data: productModel!.data![0])),
+                              );
+                            },
+                            child: SharedCode().placeholder()),
+                        Spacer(),
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        data: productModel!.data![3])),
+                              );
+                            },
+                            child: SharedCode().placeholder()),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 13,
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        data: productModel!.data![4])),
+                              );
+                            },
+                            child: SharedCode().placeholder()),
+                        Spacer(),
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        data: productModel!.data![6])),
+                              );
+                            },
+                            child: SharedCode().placeholder()),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        data: productModel!.data![8])),
+                              );
+                            },
+                            child: SharedCode().placeholder()),
+                        Spacer(),
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        data: productModel!.data![9])),
+                              );
+                            },
+                            child: SharedCode().placeholder()),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        data: productModel!.data![10])),
+                              );
+                            },
+                            child: SharedCode().placeholder()),
+                        Spacer(),
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        data: productModel!.data![12])),
+                              );
+                            },
+                            child: SharedCode().placeholder()),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        data: productModel!.data![14])),
+                              );
+                            },
+                            child: SharedCode().placeholder()),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
   }
 }

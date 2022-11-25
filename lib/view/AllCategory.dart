@@ -1,5 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
+import 'package:pas_bisnis_2022/shared/Share.dart';
 import 'package:pas_bisnis_2022/view/Categories/Adidas.dart';
 import 'package:pas_bisnis_2022/view/Categories/Converse.dart';
 import 'package:http/http.dart' as http;
@@ -54,7 +56,55 @@ class _AllCategoryState extends State<AllCategory> {
             children: [
               Stack(
                 children: [
-                  Image.asset("assets/images/newin.png"),
+                  // make carousel fullscreen
+                  CarouselSlider(
+                    options: CarouselOptions(
+                        height: 585,
+                        viewportFraction: 1.0,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        autoPlay: true,
+                        autoPlayInterval: Duration(seconds: 3),
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                        enlargeCenterPage: false,
+                        scrollPhysics: NeverScrollableScrollPhysics()),
+                    items: [
+                      //1st Image of Slider
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/newin.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      //2nd Image of Slider
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/img2.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      //3rd Image of Slider
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/img3.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      //4th Image of Slider
+                    ],
+                  ),
+
+                  // Image.asset("assets/images/newin.png"),
                   Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 478),
@@ -327,7 +377,7 @@ class _AllCategoryState extends State<AllCategory> {
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 24,
-                          mainAxisSpacing: 13,
+                          mainAxisSpacing: 20,
                           // childAspectRatio: 0.5,
                           mainAxisExtent: 238,
                         ),
@@ -350,6 +400,7 @@ class _AllCategoryState extends State<AllCategory> {
                                       productModel!.data![index].img1!,
                                       height: 159,
                                       width: double.infinity,
+                                      fit: BoxFit.fitWidth,
                                     ),
                                   ),
                                   Container(
@@ -381,7 +432,7 @@ class _AllCategoryState extends State<AllCategory> {
                                     ),
                                   ),
                                   Container(
-                                    margin: EdgeInsets.only(top: 7),
+                                    margin: EdgeInsets.only(top: 5),
                                     child: Text(
                                       'Rp. ${productModel!.data![index].price.toString()}',
                                       style: TextStyle(
@@ -399,8 +450,31 @@ class _AllCategoryState extends State<AllCategory> {
                           );
                         },
                       )
-                    : Container(),
-              )
+                    : GridView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: 17,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 24,
+                          mainAxisSpacing: 13,
+                          mainAxisExtent: 251,
+                        ),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailPage(
+                                              data: productModel!.data![index],
+                                            )));
+                              },
+                              child: SharedCode().placeholder());
+                        },
+                      ),
+              ),
             ],
           ),
         ),
