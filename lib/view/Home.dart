@@ -14,6 +14,7 @@ import 'package:pas_bisnis_2022/view/DetailPage.dart';
 import 'package:pas_bisnis_2022/view/Categories/Converse.dart';
 import 'package:pas_bisnis_2022/view/Cart.dart';
 import 'package:pas_bisnis_2022/view/MenCategory.dart';
+import 'package:pas_bisnis_2022/view/Search.dart';
 import 'package:pas_bisnis_2022/view/WomenCategory.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math' as math;
@@ -76,6 +77,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
+                automaticallyImplyLeading: false,
+                bottom: TabBar(
+                  padding: EdgeInsets.only(right: 165),
+                  indicatorPadding: EdgeInsets.symmetric(vertical: 2),
+                  indicatorColor: Color(0xFF1B1B1B),
+                  indicatorSize: TabBarIndicatorSize.label,
+                  isScrollable: true,
+                  labelColor: Color(0xFF1B1B1B),
+                  labelStyle: TextStyle(fontFamily: "Lexend", fontSize: 17.5),
+                  unselectedLabelColor: Color(0xFF1B1B1B).withOpacity(0.65),
+                  controller: _controller,
+                  tabs: list,
+                ),
                 elevation: 0,
                 collapsedHeight: 60,
                 backgroundColor: Colors.white,
@@ -104,7 +118,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => cart()),
+                          MaterialPageRoute(builder: (context) => Search()),
                         );
                       },
                     ),
@@ -126,29 +140,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     ),
                   ),
                 ],
-              ),
-              SliverPadding(
-                padding: new EdgeInsets.only(left: 5),
-                sliver: new SliverList(
-                  delegate: new SliverChildListDelegate([
-                    Container(
-                      color: Colors.white,
-                      child: TabBar(
-                        indicatorPadding: EdgeInsets.symmetric(vertical: 2),
-                        indicatorColor: Color(0xFF1B1B1B),
-                        indicatorSize: TabBarIndicatorSize.label,
-                        isScrollable: true,
-                        labelColor: Color(0xFF1B1B1B),
-                        labelStyle:
-                            TextStyle(fontFamily: "Lexend", fontSize: 17.5),
-                        unselectedLabelColor:
-                            Color(0xFF1B1B1B).withOpacity(0.65),
-                        controller: _controller,
-                        tabs: list,
-                      ),
-                    ),
-                  ]),
-                ),
               ),
             ];
           },

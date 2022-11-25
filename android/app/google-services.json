@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "840923980657",
+    "project_id": "ufee-log",
+    "storage_bucket": "ufee-log.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840923980657:android:55f99e11dd5532a7b24cd0",
+        "android_client_info": {
+          "package_name": "com.example.pas_bisnis_2022"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840923980657-upjjkj36in3eqlgmd6vhrgvbcsf2t631.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pas_bisnis_2022",
+            "certificate_hash": "17f4c4c170e2262dbbc2ed11e34b3876de09b57a"
+          }
+        },
+        {
+          "client_id": "840923980657-4e0fqql6pimvu78ktdoe8nr9ak11jtom.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWENLVnX6Y7cDQAEY49RzPPQaEu-UhfBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840923980657-4e0fqql6pimvu78ktdoe8nr9ak11jtom.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
