@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:pas_bisnis_2022/view/DetailPage.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -104,33 +105,43 @@ class _SearchState extends State<Search> {
                             SizedBox(
                               width: 10,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  productModel!.data![index].title.toString(),
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'Lexend',
-                                    fontWeight: FontWeight.w500,
+                            InkWell(
+                              onTap: (() {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailPage(
+                                              data: productModel!.data![index],
+                                            )));
+                              }),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    productModel!.data![index].title.toString(),
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'Lexend',
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'Rp. ' +
-                                      productModel!.data![index].price!
-                                          // formatter to IDR
-                                          .toString()
-                                          .replaceAllMapped(
-                                              new RegExp(
-                                                  r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                              (Match m) => '${m[1]}.'),
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
+                                  Text(
+                                    'Rp. ' +
+                                        productModel!.data![index].price!
+                                            // formatter to IDR
+                                            .toString()
+                                            .replaceAllMapped(
+                                                new RegExp(
+                                                    r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                                (Match m) => '${m[1]}.'),
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             Spacer(),
                             Container(
