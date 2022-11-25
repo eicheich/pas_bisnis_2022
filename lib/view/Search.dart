@@ -148,7 +148,7 @@ class _SearchState extends State<Search> {
                               margin: EdgeInsets.only(right: 10),
                               alignment: Alignment.bottomRight,
                               child: Icon(
-                                Icons.arrow_forward_ios_sharp,
+                                Icons.arrow_forward_ios_rounded,
                                 size: 15,
                               ),
                             )
