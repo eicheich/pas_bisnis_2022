@@ -40,7 +40,8 @@ class _ProfileState extends State<Profile> {
                       MaterialPageRoute(builder: (context) => const Login()));
                   FirebaseAuth.instance.signOut();
                 },
-                child: Text('logout'))
+                child: Text('logout')),
+            Text("Semoga timdak conflict"),
           ],
         ),
       ),
