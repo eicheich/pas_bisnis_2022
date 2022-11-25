@@ -38,93 +38,104 @@ class _SearchState extends State<Search> {
     getAllListPL();
   }
 
-  void searchShoes(String query) {
-    final shoe = productModel!.data!.where((shoe) {
-      final shoeNameLower = shoe.title.toString().toLowerCase();
-      final searchLower = query.toLowerCase();
-
-      return shoeNameLower.contains(searchLower);
-    }).toList();
-    setState(() {
+  // void search for API list
+  void search(String text) async {
+    if (text.isEmpty) {
       getAllListPL();
-      productModel!.data = shoe;
+      return;
+    }
+    productModel!.data!.retainWhere((element) {
+      var name = element.title!.toLowerCase();
+      var search = text.toLowerCase();
+      return name.contains(search);
     });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search'),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Color(0xFF1B1B1B),
+        title: Container(
+          width: 240,
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: "Find Products...",
+              hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+            ),
+            style: TextStyle(color: Colors.white),
+            onChanged: (value) {
+              search(value);
+            },
+          ),
+        ),
       ),
       body: Column(
         children: [
-          // search
-          Container(
-            margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-            child: TextField(
-              onChanged: (value) => searchShoes(value),
-              decoration: const InputDecoration(
-                hintText: 'Search',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          // list
           Expanded(
             child: isloaded
                 ? ListView.builder(
                     itemCount: productModel!.data!.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.only(
-                            top: 10, left: 10, right: 10, bottom: 10),
+                      return Card(
+                        margin: EdgeInsets.only(right: 20, left: 20, top: 10),
+                        shadowColor: Colors.black.withOpacity(0.5),
+                        elevation: 3,
                         child: Row(
                           children: [
                             Container(
-                              width: 100,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      productModel!.data![index].img1!),
-                                  fit: BoxFit.cover,
-                                ),
+                              width: 87,
+                              height: 78,
+                              child: Image.network(
+                                productModel!.data![index].img1.toString(),
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
-                            const SizedBox(
+                            SizedBox(
                               width: 10,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  productModel!.data![index].brand!,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                  productModel!.data![index].title.toString(),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'Lexend',
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                                 Text(
-                                  productModel!.data![index].title!,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  productModel!.data![index].price!,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                                  'Rp. ' +
+                                      productModel!.data![index].price
+                                          .toString(),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ],
                             ),
+                            Spacer(),
+                            Container(
+                              margin: EdgeInsets.only(right: 10),
+                              alignment: Alignment.bottomRight,
+                              child: Icon(
+                                Icons.arrow_forward_ios_sharp,
+                                size: 15,
+                              ),
+                            )
                           ],
                         ),
                       );
