@@ -330,8 +330,8 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(
                     height: 35,
                   ),
-                  Expanded(
-                    flex: 1,
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
