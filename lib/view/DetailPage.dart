@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -197,9 +198,27 @@ class _DetailPageState extends State<DetailPage> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.network(
-                    widget.data.img1!,
-                    fit: BoxFit.fitWidth,
+                  background: CarouselSlider(
+                    options: CarouselOptions(
+                      height: MediaQuery.of(context).size.height,
+                      autoPlay: false,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      enableInfiniteScroll: false,
+                      viewportFraction: 1,
+                    ),
+                    items: [
+                      Image.network(
+                        widget.data.img1!,
+                        fit: BoxFit.fitWidth,
+                      ),
+                      Image.network(
+                        widget.data.img2!,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -268,7 +287,10 @@ class _DetailPageState extends State<DetailPage> {
                       Container(
                         margin: EdgeInsets.only(top: 47),
                         child: Text(
-                          "Rp. " + widget.data.price!,
+                          "Rp. " +
+                              widget.data.price!.replaceAllMapped(
+                                  new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                  (Match m) => '${m[1]}.'),
                           style: TextStyle(
                             fontFamily: "Poppins",
                             fontSize: 20,
@@ -308,35 +330,38 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(
                     height: 35,
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        "assets/images/delivery.png",
-                        height: 28,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 16),
-                            child: Text(
-                              "Free Delivery on orders above Rp. 500.000",
-                              style: SharedCode().textStyle("Lexend", 13,
-                                  Color(0xFF1B1B1B), FontWeight.w600),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          "assets/images/delivery.png",
+                          height: 28,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 16),
+                              child: Text(
+                                "Free Delivery on orders above Rp. 500.000",
+                                style: SharedCode().textStyle("Lexend", 13,
+                                    Color(0xFF1B1B1B), FontWeight.w600),
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 16, top: 3),
-                            child: Text(
-                              "Get the order fast to you",
-                              style: SharedCode().textStyle("Lexend", 13,
-                                  Color(0xFF1B1B1B), FontWeight.w400),
+                            Container(
+                              margin: EdgeInsets.only(left: 16, top: 3),
+                              child: Text(
+                                "Get the order fast to you",
+                                style: SharedCode().textStyle("Lexend", 13,
+                                    Color(0xFF1B1B1B), FontWeight.w400),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 24),

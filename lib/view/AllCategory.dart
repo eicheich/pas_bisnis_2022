@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:pas_bisnis_2022/shared/Share.dart';
@@ -55,7 +56,55 @@ class _AllCategoryState extends State<AllCategory> {
             children: [
               Stack(
                 children: [
-                  Image.asset("assets/images/newin.png"),
+                  // make carousel fullscreen
+                  CarouselSlider(
+                    options: CarouselOptions(
+                        height: 585,
+                        viewportFraction: 1.0,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        autoPlay: true,
+                        autoPlayInterval: Duration(seconds: 3),
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                        enlargeCenterPage: false,
+                        scrollPhysics: NeverScrollableScrollPhysics()),
+                    items: [
+                      //1st Image of Slider
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/newin.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      //2nd Image of Slider
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/img2.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      //3rd Image of Slider
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/img3.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      //4th Image of Slider
+                    ],
+                  ),
+
+                  // Image.asset("assets/images/newin.png"),
                   Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 478),
@@ -385,7 +434,7 @@ class _AllCategoryState extends State<AllCategory> {
                                   Container(
                                     margin: EdgeInsets.only(top: 5),
                                     child: Text(
-                                      'Rp. ${productModel!.data![index].price.toString()}',
+                                      'Rp. ${productModel!.data![index].price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
                                       style: TextStyle(
                                         fontFamily: "Poppins",
                                         height: 1,
@@ -425,7 +474,7 @@ class _AllCategoryState extends State<AllCategory> {
                               child: SharedCode().placeholder());
                         },
                       ),
-              )
+              ),
             ],
           ),
         ),
