@@ -434,7 +434,7 @@ class _AllCategoryState extends State<AllCategory> {
                                   Container(
                                     margin: EdgeInsets.only(top: 5),
                                     child: Text(
-                                      'Rp. ${productModel!.data![index].price.toString()}',
+                                      'Rp. ${productModel!.data![index].price.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}',
                                       style: TextStyle(
                                         fontFamily: "Poppins",
                                         height: 1,
