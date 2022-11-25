@@ -351,6 +351,7 @@ class _AllCategoryState extends State<AllCategory> {
                                       productModel!.data![index].img1!,
                                       height: 159,
                                       width: double.infinity,
+                                      fit: BoxFit.fitWidth,
                                     ),
                                   ),
                                   Container(
