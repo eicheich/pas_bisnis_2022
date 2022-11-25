@@ -60,10 +60,13 @@ class _WomenCategoryState extends State<WomenCategory> {
                             );
                           },
                           child: SharedCode().productUi(
-                              productModel!.data![1].img1!,
-                              productModel!.data![1].title!,
-                              productModel!.data![1].sold!,
-                              productModel!.data![1].price!),
+                            productModel!.data![1].img1!,
+                            productModel!.data![1].title!,
+                            productModel!.data![1].sold!,
+                            productModel!.data![1].price!.replaceAllMapped(
+                                new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                (Match m) => '${m[1]}.'),
+                          ),
                         ),
                         Spacer(),
                         InkWell(
@@ -76,10 +79,13 @@ class _WomenCategoryState extends State<WomenCategory> {
                             );
                           },
                           child: SharedCode().productUi(
-                              productModel!.data![2].img1!,
-                              productModel!.data![2].title!,
-                              productModel!.data![2].sold!,
-                              productModel!.data![2].price!),
+                            productModel!.data![2].img1!,
+                            productModel!.data![2].title!,
+                            productModel!.data![2].sold!,
+                            productModel!.data![2].price!.replaceAllMapped(
+                                new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                (Match m) => '${m[1]}.'),
+                          ),
                         ),
                       ],
                     ),
@@ -95,10 +101,13 @@ class _WomenCategoryState extends State<WomenCategory> {
                             );
                           },
                           child: SharedCode().productUi(
-                              productModel!.data![5].img1!,
-                              productModel!.data![5].title!,
-                              productModel!.data![5].sold!,
-                              productModel!.data![5].price!),
+                            productModel!.data![5].img1!,
+                            productModel!.data![5].title!,
+                            productModel!.data![5].sold!,
+                            productModel!.data![5].price!.replaceAllMapped(
+                                new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                (Match m) => '${m[1]}.'),
+                          ),
                         ),
                         Spacer(),
                         InkWell(
@@ -111,10 +120,13 @@ class _WomenCategoryState extends State<WomenCategory> {
                             );
                           },
                           child: SharedCode().productUi(
-                              productModel!.data![7].img1!,
-                              productModel!.data![7].title!,
-                              productModel!.data![7].sold!,
-                              productModel!.data![7].price!),
+                            productModel!.data![7].img1!,
+                            productModel!.data![7].title!,
+                            productModel!.data![7].sold!,
+                            productModel!.data![7].price!.replaceAllMapped(
+                                new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                (Match m) => '${m[1]}.'),
+                          ),
                         ),
                       ],
                     ),
@@ -130,10 +142,13 @@ class _WomenCategoryState extends State<WomenCategory> {
                             );
                           },
                           child: SharedCode().productUi(
-                              productModel!.data![11].img1!,
-                              productModel!.data![11].title!,
-                              productModel!.data![11].sold!,
-                              productModel!.data![11].price!),
+                            productModel!.data![11].img1!,
+                            productModel!.data![11].title!,
+                            productModel!.data![11].sold!,
+                            productModel!.data![11].price!.replaceAllMapped(
+                                new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                (Match m) => '${m[1]}.'),
+                          ),
                         ),
                         Spacer(),
                         InkWell(
@@ -146,10 +161,13 @@ class _WomenCategoryState extends State<WomenCategory> {
                             );
                           },
                           child: SharedCode().productUi(
-                              productModel!.data![13].img1!,
-                              productModel!.data![13].title!,
-                              productModel!.data![13].sold!,
-                              productModel!.data![13].price!),
+                            productModel!.data![13].img1!,
+                            productModel!.data![13].title!,
+                            productModel!.data![13].sold!,
+                            productModel!.data![13].price!.replaceAllMapped(
+                                new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                (Match m) => '${m[1]}.'),
+                          ),
                         ),
                       ],
                     ),
@@ -165,10 +183,13 @@ class _WomenCategoryState extends State<WomenCategory> {
                             );
                           },
                           child: SharedCode().productUi(
-                              productModel!.data![15].img1!,
-                              productModel!.data![15].title!,
-                              productModel!.data![15].sold!,
-                              productModel!.data![15].price!),
+                            productModel!.data![15].img1!,
+                            productModel!.data![15].title!,
+                            productModel!.data![15].sold!,
+                            productModel!.data![15].price!.replaceAllMapped(
+                                new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                (Match m) => '${m[1]}.'),
+                          ),
                         ),
                         Spacer(),
                         InkWell(
@@ -181,10 +202,13 @@ class _WomenCategoryState extends State<WomenCategory> {
                             );
                           },
                           child: SharedCode().productUi(
-                              productModel!.data![16].img1!,
-                              productModel!.data![16].title!,
-                              productModel!.data![16].sold!,
-                              productModel!.data![16].price!),
+                            productModel!.data![16].img1!,
+                            productModel!.data![16].title!,
+                            productModel!.data![16].sold!,
+                            productModel!.data![16].price!.replaceAllMapped(
+                                new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                (Match m) => '${m[1]}.'),
+                          ),
                         ),
                       ],
                     ),
