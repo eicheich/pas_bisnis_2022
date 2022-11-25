@@ -196,4 +196,91 @@ class SharedCode {
       ],
     );
   }
+
+  Widget listProfileSetting(String image, String title, String desc) {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.only(left: 24, right: 24),
+        color: Colors.white,
+        height: 74,
+        child: Row(children: [
+          Image.asset(
+            image,
+            height: 24,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.only(left: 12, top: 16),
+                child: Text(
+                  title,
+                  style: SharedCode().textStyle(
+                      "Lexend", 15, Color(0xFF1B1B1B), FontWeight.w500),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 12, top: 4),
+                child: Text(
+                  desc,
+                  style: SharedCode().textStyle(
+                      "Lexend", 12, Color(0xFF1B1B1B), FontWeight.w400),
+                ),
+              ),
+            ],
+          ),
+          Spacer(),
+          Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 24,
+          ),
+        ]),
+      ),
+    );
+  }
+
+  Widget listProfileInformation(String image, String title) {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.only(left: 24, right: 24),
+        color: Colors.white,
+        height: 74,
+        child: Row(children: [
+          Image.asset(
+            image,
+            height: 24,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.only(left: 12),
+                child: Text(
+                  title,
+                  style: SharedCode().textStyle(
+                      "Lexend", 15, Color(0xFF1B1B1B), FontWeight.w500),
+                ),
+              ),
+            ],
+          ),
+          Spacer(),
+          Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 24,
+          ),
+        ]),
+      ),
+    );
+  }
+}
+
+extension StringCasingExtension on String {
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized())
+      .join(' ');
 }
