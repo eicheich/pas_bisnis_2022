@@ -425,7 +425,9 @@ class _AllCategoryState extends State<AllCategory> {
                               child: SharedCode().placeholder());
                         },
                       ),
-              )
+
+              ),
+              Text('wlwlwlwl'),
             ],
           ),
         ),
