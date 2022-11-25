@@ -117,8 +117,13 @@ class _SearchState extends State<Search> {
                                 ),
                                 Text(
                                   'Rp. ' +
-                                      productModel!.data![index].price
-                                          .toString(),
+                                      productModel!.data![index].price!
+                                          // formatter to IDR
+                                          .toString()
+                                          .replaceAllMapped(
+                                              new RegExp(
+                                                  r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                              (Match m) => '${m[1]}.'),
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: 'Poppins',
