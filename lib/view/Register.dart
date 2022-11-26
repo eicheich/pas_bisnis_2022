@@ -114,12 +114,53 @@ class _RegisterState extends State<Register> {
           ),
           InkWell(
             onTap: () async {
-              await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                  email: _emailController.text,
-                  password: _passwordController.text);
-
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Login()));
+              try {
+                UserCredential userCredential = await FirebaseAuth.instance
+                    .createUserWithEmailAndPassword(
+                        email: _emailController.text,
+                        password: _passwordController.text);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Navigation()));
+              } on FirebaseAuthException catch (e) {
+                if (e.code == 'weak-password') {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Weak password'),
+                          content: Text('The password provided is too weak.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      });
+                } else if (e.code == 'email-already-in-use') {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Email already in use'),
+                          content: Text(
+                              'The account already exists for that email.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('OK'),
+                            ),
+                          ],
+                        );
+                      });
+                }
+              } catch (e) {
+                print(e);
+              }
             },
             child: SharedCode().buttonUi('Join Us'),
           ),
