@@ -195,12 +195,33 @@ class _ProfileState extends State<Profile> {
                           height: 25,
                         ),
                         InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Login()));
-                            FirebaseAuth.instance.signOut();
+                          onLongPress: () {
+                            // show dialog logout
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text("Logout"),
+                                    content: Text("Are you sure to logout? :("),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Cancel")),
+                                      TextButton(
+                                          onPressed: () {
+                                            FirebaseAuth.instance.signOut();
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Login()));
+                                          },
+                                          child: Text("Logout")),
+                                    ],
+                                  );
+                                });
                           },
                           child: SharedCode().listProfileInformation(
                               "assets/images/logout.png", "Log Out"),
