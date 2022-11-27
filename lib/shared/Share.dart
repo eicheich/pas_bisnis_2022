@@ -274,6 +274,43 @@ class SharedCode {
       ),
     );
   }
+
+  Widget listNotif(String title, String img, String h2) {
+    return Container(
+      child: Row(
+        children: [
+          SizedBox(
+            width: 24,
+          ),
+          Container(
+            width: 65,
+            height: 65,
+            child: Image.network(img),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: SharedCode().textStyle(
+                    "Lexend", 15, Color(0xFF1B1B1B), FontWeight.w500),
+              ),
+              Text(
+                h2,
+                // trim text
+                overflow: TextOverflow.ellipsis,
+                style: SharedCode().textStyle("Lexend", 12,
+                    Color(0xFF1B1B1B).withOpacity(0.75), FontWeight.w400),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 extension StringCasingExtension on String {
