@@ -45,6 +45,7 @@ class _adidasState extends State<adidas> {
     return Scaffold(
         appBar: isloaded == true
             ? AppBar(
+              
                 backgroundColor: Color(0xFF1E5128),
                 title: Text(
                   productModel!.data![4].brand.toString(),

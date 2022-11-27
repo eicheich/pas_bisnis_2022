@@ -117,6 +117,10 @@ flutter:
   - assets/images/img2.png
   - assets/images/img3.png
 
+  - assets/images/notif_games.png
+  - assets/images/notif_disc.png
+  - assets/images/notif_wallet.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
