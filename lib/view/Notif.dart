@@ -39,32 +39,39 @@ class _NotifState extends State<Notif> {
 
   @override
   Widget build(BuildContext context) {
-    return isloaded
-        ? Scaffold(
-            appBar: AppBar(
-              shadowColor: Colors.transparent,
-              backgroundColor: Colors.white,
-              title: const Text(
-                'Notification',
-                style: TextStyle(color: Color(0xFF1B1B1B)),
-              ),
-            ),
-            body: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        shadowColor: Colors.transparent,
+        backgroundColor: Colors.white,
+        title: Container(
+          margin: EdgeInsets.only(left: 5),
+          child: Text(
+            'Notification',
+            style: SharedCode()
+                .textStyle("Lexend", 20, Color(0xFF1B1B1B), FontWeight.w400),
+          ),
+        ),
+      ),
+      body: isloaded
+          ? SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SharedCode().listProfileSetting(
                       "assets/images/notif_disc.png",
                       "Discount",
-                      "Buy shoes to save more"),
+                      "Buy shoes to save more",
+                      Color(0xFFFAFAFA)),
                   SharedCode().listProfileSetting(
                       "assets/images/notif_wallet.png",
                       "Transaction",
-                      "Payment for transactions 21309.."),
+                      "Payment for transactions 21309..",
+                      Color(0xFFFAFAFA)),
                   SharedCode().listProfileSetting(
                       "assets/images/notif_games.png",
                       "Ufee games",
-                      "Win the game to earn rewards"),
+                      "Win the game to earn rewards",
+                      Color(0xFFFAFAFA)),
                   SizedBox(
                     height: 16,
                   ),
@@ -106,10 +113,44 @@ class _NotifState extends State<Notif> {
                       'payment for transaction 1235213YZ, \nusing a credit card was successful'),
                 ],
               ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SharedCode().placeholderNotifUpper(),
+                  SharedCode().placeholderNotifUpper(),
+                  SharedCode().placeholderNotifUpper(),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 24, right: 24),
+                    child: Text(
+                      "All notifications (12)",
+                      style: SharedCode().textStyle(
+                          "Lexend", 18, Color(0xFF1B1B1B), FontWeight.w500),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SharedCode().placeholderNotifLower(),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SharedCode().placeholderNotifLower(),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SharedCode().placeholderNotifLower(),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SharedCode().placeholderNotifLower(),
+                ],
+              ),
             ),
-          )
-        : Center(
-            child: CircularProgressIndicator(),
-          );
+    );
   }
 }

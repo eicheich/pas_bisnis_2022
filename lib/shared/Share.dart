@@ -98,6 +98,86 @@ class SharedCode {
     );
   }
 
+  Widget placeholderNotifUpper() {
+    return Container(
+      padding: EdgeInsets.only(left: 24, right: 24),
+      color: Color(0xFFFAFAFA),
+      height: 74,
+      child: Row(children: [
+        Container(
+          height: 24,
+          width: 24,
+          color: Color(0xFFD3D3D3),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 12, top: 16),
+              height: 19,
+              width: 73,
+              color: Color(0xFFD3D3D3),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 12, top: 4),
+              height: 15,
+              width: 140,
+              color: Color(0xFFD3D3D3),
+            ),
+          ],
+        ),
+        Spacer(),
+        Container(
+          height: 24,
+          width: 24,
+          color: Color(0xFFD3D3D3),
+        )
+      ]),
+    );
+  }
+
+  Widget placeholderNotifLower() {
+    return Container(
+      child: Row(
+        children: [
+          SizedBox(
+            width: 24,
+          ),
+          Container(
+            width: 65,
+            height: 65,
+            color: Color(0xFFD3D3D3),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 20,
+                width: 150,
+                color: Color(0xFFD3D3D3),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 2),
+                height: 15,
+                width: 230,
+                color: Color(0xFFD3D3D3),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 2),
+                height: 15,
+                width: 200,
+                color: Color(0xFFD3D3D3),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   TextStyle textStyle(
       String fontFamily, double fontSize, Color color, FontWeight fontWeight) {
     return TextStyle(
@@ -197,12 +277,13 @@ class SharedCode {
     );
   }
 
-  Widget listProfileSetting(String image, String title, String desc) {
+  Widget listProfileSetting(
+      String image, String title, String desc, Color bgcolor) {
     return InkWell(
       onTap: () {},
       child: Container(
         padding: EdgeInsets.only(left: 24, right: 24),
-        color: Colors.white,
+        color: bgcolor,
         height: 74,
         child: Row(children: [
           Image.asset(
@@ -240,7 +321,7 @@ class SharedCode {
     );
   }
 
-  Widget listProfileInformation(String image, String title) {
+  Widget listProfileInformation(String image, String title, Color backgorund) {
     return InkWell(
       onTap: () {},
       child: Container(
