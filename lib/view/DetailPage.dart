@@ -118,30 +118,53 @@ class _DetailPageState extends State<DetailPage> {
                 width: 69,
                 height: 47.5,
                 child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(
-                      width: 1.8,
-                      color: Color(0xFF1B1B1B),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(
+                        width: 1.8,
+                        color: Color(0xFF1B1B1B),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(8.0),
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(8.0),
+                    onPressed: () {
+                      // dialog add to cart
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("Add to cart"),
+                              content: Text("Are you sure to add to cart?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Cancel"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    insert(widget.data);
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Yes"),
+                                ),
+                              ],
+                            );
+                          });
+                      // addCart ? delete(widget.data) : insert(widget.data);
+                    },
+                    child: Image.asset(
+                      "assets/images/bagFill.png",
+                      height: 26,
+                      width: 26,
+                    )
+                    // : Image.asset(
+                    //     "assets/images/bagOutline.png",
+                    //     height: 26,
+                    //     width: 26,
+                    //   ),
                     ),
-                  ),
-                  onPressed: () {
-                    addCart ? delete(widget.data) : insert(widget.data);
-                  },
-                  child: addCart
-                      ? Image.asset(
-                          "assets/images/bagFill.png",
-                          height: 26,
-                          width: 26,
-                        )
-                      : Image.asset(
-                          "assets/images/bagOutline.png",
-                          height: 26,
-                          width: 26,
-                        ),
-                ),
               ),
               Expanded(
                 child: Container(
@@ -198,28 +221,28 @@ class _DetailPageState extends State<DetailPage> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                  background: CarouselSlider(
-                    options: CarouselOptions(
-                      height: MediaQuery.of(context).size.height,
-                      autoPlay: false,
-                      autoPlayInterval: Duration(seconds: 3),
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: true,
-                      enableInfiniteScroll: false,
-                      viewportFraction: 1,
+                  // carousel slider
+                  background: Container(
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        enableInfiniteScroll: false,
+                        height: 300,
+                        scrollDirection: Axis.horizontal,
+                      ),
+                      items: [
+                        Image.network(
+                          widget.data.img1!,
+                          fit: BoxFit.fitHeight,
+                        ),
+                        Image.network(
+                          widget.data.img2!,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ],
                     ),
-                    items: [
-                      Image.network(
-                        widget.data.img1!,
-                        fit: BoxFit.fitWidth,
-                      ),
-                      Image.network(
-                        widget.data.img2!,
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ],
                   ),
+
+                  // background:
                 ),
               ),
             )
@@ -287,7 +310,10 @@ class _DetailPageState extends State<DetailPage> {
                       Container(
                         margin: EdgeInsets.only(top: 47),
                         child: Text(
-                          "Rp. " + widget.data.price!,
+                          "Rp. " +
+                              widget.data.price!.replaceAllMapped(
+                                  new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                  (Match m) => '${m[1]}.'),
                           style: TextStyle(
                             fontFamily: "Poppins",
                             fontSize: 20,
@@ -327,35 +353,38 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(
                     height: 35,
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        "assets/images/delivery.png",
-                        height: 28,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 16),
-                            child: Text(
-                              "Free Delivery on orders above Rp. 500.000",
-                              style: SharedCode().textStyle("Lexend", 13,
-                                  Color(0xFF1B1B1B), FontWeight.w600),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          "assets/images/delivery.png",
+                          height: 28,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 16),
+                              child: Text(
+                                "Free Delivery on orders above Rp. 500.000",
+                                style: SharedCode().textStyle("Lexend", 13,
+                                    Color(0xFF1B1B1B), FontWeight.w600),
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 16, top: 3),
-                            child: Text(
-                              "Get the order fast to you",
-                              style: SharedCode().textStyle("Lexend", 13,
-                                  Color(0xFF1B1B1B), FontWeight.w400),
+                            Container(
+                              margin: EdgeInsets.only(left: 16, top: 3),
+                              child: Text(
+                                "Get the order fast to you",
+                                style: SharedCode().textStyle("Lexend", 13,
+                                    Color(0xFF1B1B1B), FontWeight.w400),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 24),
@@ -393,7 +422,12 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![0].img1.toString(),
                                       productModel!.data![0].title.toString(),
                                       productModel!.data![0].sold.toString(),
-                                      productModel!.data![0].price.toString())
+                                      productModel!.data![0].price!
+                                          .replaceAllMapped(
+                                              new RegExp(
+                                                  r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                              (Match m) => '${m[1]}.'),
+                                    )
                                   : SharedCode().placeholder(),
                             ),
                           ),
@@ -413,7 +447,12 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![2].img1.toString(),
                                       productModel!.data![2].title.toString(),
                                       productModel!.data![2].sold.toString(),
-                                      productModel!.data![2].price.toString())
+                                      productModel!.data![2].price!
+                                          .replaceAllMapped(
+                                              new RegExp(
+                                                  r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                              (Match m) => '${m[1]}.'),
+                                    )
                                   : SharedCode().placeholder(),
                             ),
                           ),
