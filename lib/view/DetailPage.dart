@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -198,27 +197,9 @@ class _DetailPageState extends State<DetailPage> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                  background: CarouselSlider(
-                    options: CarouselOptions(
-                      height: MediaQuery.of(context).size.height,
-                      autoPlay: false,
-                      autoPlayInterval: Duration(seconds: 3),
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: true,
-                      enableInfiniteScroll: false,
-                      viewportFraction: 1,
-                    ),
-                    items: [
-                      Image.network(
-                        widget.data.img1!,
-                        fit: BoxFit.fitWidth,
-                      ),
-                      Image.network(
-                        widget.data.img2!,
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ],
+                  background: Image.network(
+                    widget.data.img1!,
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
               ),
@@ -330,8 +311,8 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(
                     height: 35,
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
+                  Expanded(
+                    flex: 1,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -399,7 +380,12 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![0].img1.toString(),
                                       productModel!.data![0].title.toString(),
                                       productModel!.data![0].sold.toString(),
-                                      productModel!.data![0].price.toString())
+                                      productModel!.data![0].price!
+                                          .replaceAllMapped(
+                                              new RegExp(
+                                                  r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                              (Match m) => '${m[1]}.'),
+                                    )
                                   : SharedCode().placeholder(),
                             ),
                           ),
@@ -419,7 +405,9 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![2].img1.toString(),
                                       productModel!.data![2].title.toString(),
                                       productModel!.data![2].sold.toString(),
-                                      productModel!.data![2].price.toString())
+                                      productModel!.data![2].price!.replaceAllMapped(
+                                  new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                  (Match m) => '${m[1]}.'),)
                                   : SharedCode().placeholder(),
                             ),
                           ),
