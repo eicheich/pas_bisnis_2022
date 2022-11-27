@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:pas_bisnis_2022/shared/Share.dart';
 import 'package:pas_bisnis_2022/view/DetailPage.dart';
 
 class Search extends StatefulWidget {
@@ -72,7 +73,13 @@ class _SearchState extends State<Search> {
           child: TextField(
             decoration: InputDecoration(
               hintText: "Find Products...",
-              hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+              hintStyle: SharedCode().textStyle(
+                  "Lexend", 16, Colors.white.withOpacity(0.5), FontWeight.w400),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white)),
             ),
             style: TextStyle(color: Colors.white),
             onChanged: (value) {
@@ -83,6 +90,9 @@ class _SearchState extends State<Search> {
       ),
       body: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: isloaded
                 ? ListView.builder(
