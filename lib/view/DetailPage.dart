@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
+import 'package:pas_bisnis_2022/view/Cart.dart';
 import 'package:pas_bisnis_2022/view/transaction.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
@@ -128,43 +129,45 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                     onPressed: () {
-                      // dialog add to cart
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text("Add to cart"),
-                              content: Text("Are you sure to add to cart?"),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Cancel"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    insert(widget.data);
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Yes"),
-                                ),
-                              ],
-                            );
-                          });
-                      // addCart ? delete(widget.data) : insert(widget.data);
+                      addCart
+                          ? delete(widget.data)
+                          :
+                          // dialog add to cart
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Add to cart"),
+                                  content: Text("Are you sure to add to cart?"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Cancel"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        insert(widget.data);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Yes"),
+                                    ),
+                                  ],
+                                );
+                              });
                     },
-                    child: Image.asset(
-                      "assets/images/bagFill.png",
-                      height: 26,
-                      width: 26,
-                    )
-                    // : Image.asset(
-                    //     "assets/images/bagOutline.png",
-                    //     height: 26,
-                    //     width: 26,
-                    //   ),
-                    ),
+                    child: addCart
+                        ? Image.asset(
+                            "assets/images/bagFill.png",
+                            height: 26,
+                            width: 26,
+                          )
+                        : Image.asset(
+                            "assets/images/bagOutline.png",
+                            height: 26,
+                            width: 26,
+                          )),
               ),
               Expanded(
                 child: Container(
@@ -205,6 +208,24 @@ class _DetailPageState extends State<DetailPage> {
             PreferredSize(
               preferredSize: Size.fromHeight(0.0),
               child: SliverAppBar(
+                actions: [
+                  Container(
+                    padding: EdgeInsets.only(right: 5),
+                    child: IconButton(
+                      icon: Image.asset(
+                        "assets/images/shop.png",
+                        color: Color(0xFF1B1B1B),
+                        height: 26,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => cart()),
+                        );
+                      },
+                    ),
+                  ),
+                ],
                 backgroundColor: Colors.white,
                 stretch: false,
                 pinned: true,
@@ -241,8 +262,6 @@ class _DetailPageState extends State<DetailPage> {
                       ],
                     ),
                   ),
-
-                  // background:
                 ),
               ),
             )
@@ -368,7 +387,7 @@ class _DetailPageState extends State<DetailPage> {
                             Container(
                               margin: EdgeInsets.only(left: 16),
                               child: Text(
-                                "Free Delivery on orders above Rp. 500.000",
+                                "Free Shipping on orders above Rp. 500.000",
                                 style: SharedCode().textStyle("Lexend", 13,
                                     Color(0xFF1B1B1B), FontWeight.w600),
                               ),
