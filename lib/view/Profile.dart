@@ -137,7 +137,8 @@ class _ProfileState extends State<Profile> {
                         SharedCode().listProfileSetting(
                             "assets/images/address.png",
                             "Address Book",
-                            "Manage your address info"),
+                            "Manage your address info",
+                            Colors.white),
                         Padding(
                           padding: const EdgeInsets.only(left: 24, right: 24),
                           child: Divider(
@@ -148,7 +149,8 @@ class _ProfileState extends State<Profile> {
                         SharedCode().listProfileSetting(
                             "assets/images/language.png",
                             "Language",
-                            "Change your language"),
+                            "Change your language",
+                            Colors.white),
                         Padding(
                           padding: const EdgeInsets.only(left: 24, right: 24),
                           child: Divider(
@@ -159,7 +161,8 @@ class _ProfileState extends State<Profile> {
                         SharedCode().listProfileSetting(
                             "assets/images/notification.png",
                             "Notification",
-                            "Manage notifications setting"),
+                            "Manage notifications setting",
+                            Colors.white),
                         SizedBox(
                           height: 30,
                         ),
@@ -172,7 +175,9 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         SharedCode().listProfileInformation(
-                            "assets/images/information.png", "General Help"),
+                            "assets/images/information.png",
+                            "General Help",
+                            Colors.white),
                         Padding(
                           padding: const EdgeInsets.only(left: 24, right: 24),
                           child: Divider(
@@ -181,7 +186,9 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         SharedCode().listProfileInformation(
-                            "assets/images/terms.png", "Terms and Conditions"),
+                            "assets/images/terms.png",
+                            "Terms and Conditions",
+                            Colors.white),
                         Padding(
                           padding: const EdgeInsets.only(left: 24, right: 24),
                           child: Divider(
@@ -190,7 +197,9 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         SharedCode().listProfileInformation(
-                            "assets/images/shield.png", "Privacy Policy"),
+                            "assets/images/shield.png",
+                            "Privacy Policy",
+                            Colors.white),
                         SizedBox(
                           height: 25,
                         ),
@@ -224,7 +233,9 @@ class _ProfileState extends State<Profile> {
                                 });
                           },
                           child: SharedCode().listProfileInformation(
-                              "assets/images/logout.png", "Log Out"),
+                              "assets/images/logout.png",
+                              "Log Out",
+                              Colors.white),
                         ),
                       ],
                     ),
