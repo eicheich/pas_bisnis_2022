@@ -127,7 +127,7 @@ class _ProfileState extends State<Profile> {
                           padding: EdgeInsets.only(left: 24, right: 24),
                           child: Text(
                             "Account Settings",
-                            style: SharedCode().textStyle("Lexend", 18,
+                            style: SharedCode().textStyle("Lexend", 20,
                                 Color(0xFF1B1B1B), FontWeight.w500),
                           ),
                         ),
@@ -170,7 +170,7 @@ class _ProfileState extends State<Profile> {
                           padding: EdgeInsets.only(left: 24, right: 24),
                           child: Text(
                             "Information",
-                            style: SharedCode().textStyle("Lexend", 18,
+                            style: SharedCode().textStyle("Lexend", 20,
                                 Color(0xFF1B1B1B), FontWeight.w500),
                           ),
                         ),
