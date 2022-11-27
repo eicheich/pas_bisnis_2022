@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -220,10 +221,28 @@ class _DetailPageState extends State<DetailPage> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.network(
-                    widget.data.img1!,
-                    fit: BoxFit.fitWidth,
+                  // carousel slider
+                  background: Container(
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        enableInfiniteScroll: false,
+                        height: 300,
+                        scrollDirection: Axis.horizontal,
+                      ),
+                      items: [
+                        Image.network(
+                          widget.data.img1!,
+                          fit: BoxFit.fitHeight,
+                        ),
+                        Image.network(
+                          widget.data.img2!,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ],
+                    ),
                   ),
+
+                  // background:
                 ),
               ),
             )
