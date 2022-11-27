@@ -98,10 +98,7 @@ class _LoginState extends State<Login> {
             Container(
               alignment: Alignment.topRight,
               child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => cart()));
-                },
+                onTap: () {},
                 child: new Text(
                   'Forgotten your password?',
                   style: TextStyle(
@@ -120,12 +117,50 @@ class _LoginState extends State<Login> {
             ),
             InkWell(
               onTap: () async {
-                await FirebaseAuth.instance.signInWithEmailAndPassword(
-                    email: _emailController.text,
-                    password: _passwordController.text);
-
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Navigation()));
+                try {
+                  await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: _emailController.text,
+                      password: _passwordController.text);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Navigation()));
+                } on FirebaseAuthException catch (e) {
+                  if (e.code == 'user-not-found') {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Wrong Email'),
+                            content: Text('No user found for that email.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        });
+                  } else if (e.code == 'wrong-password') {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Wrong Password'),
+                            content:
+                                Text('Wrong password provided for that user.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        });
+                  }
+                }
               },
               child: SharedCode().buttonUi('Login'),
             ),
