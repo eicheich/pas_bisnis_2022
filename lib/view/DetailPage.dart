@@ -117,30 +117,53 @@ class _DetailPageState extends State<DetailPage> {
                 width: 69,
                 height: 47.5,
                 child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(
-                      width: 1.8,
-                      color: Color(0xFF1B1B1B),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(
+                        width: 1.8,
+                        color: Color(0xFF1B1B1B),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(8.0),
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(8.0),
+                    onPressed: () {
+                      // dialog add to cart
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("Add to cart"),
+                              content: Text("Are you sure to add to cart?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Cancel"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    insert(widget.data);
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Yes"),
+                                ),
+                              ],
+                            );
+                          });
+                      // addCart ? delete(widget.data) : insert(widget.data);
+                    },
+                    child: Image.asset(
+                      "assets/images/bagFill.png",
+                      height: 26,
+                      width: 26,
+                    )
+                    // : Image.asset(
+                    //     "assets/images/bagOutline.png",
+                    //     height: 26,
+                    //     width: 26,
+                    //   ),
                     ),
-                  ),
-                  onPressed: () {
-                    addCart ? delete(widget.data) : insert(widget.data);
-                  },
-                  child: addCart
-                      ? Image.asset(
-                          "assets/images/bagFill.png",
-                          height: 26,
-                          width: 26,
-                        )
-                      : Image.asset(
-                          "assets/images/bagOutline.png",
-                          height: 26,
-                          width: 26,
-                        ),
-                ),
               ),
               Expanded(
                 child: Container(
@@ -311,8 +334,8 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(
                     height: 35,
                   ),
-                  Expanded(
-                    flex: 1,
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -405,9 +428,12 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![2].img1.toString(),
                                       productModel!.data![2].title.toString(),
                                       productModel!.data![2].sold.toString(),
-                                      productModel!.data![2].price!.replaceAllMapped(
-                                  new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                  (Match m) => '${m[1]}.'),)
+                                      productModel!.data![2].price!
+                                          .replaceAllMapped(
+                                              new RegExp(
+                                                  r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                              (Match m) => '${m[1]}.'),
+                                    )
                                   : SharedCode().placeholder(),
                             ),
                           ),
