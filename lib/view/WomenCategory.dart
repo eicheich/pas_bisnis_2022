@@ -45,7 +45,7 @@ class _WomenCategoryState extends State<WomenCategory> {
             body: SingleChildScrollView(
               child: Container(
                 margin:
-                    EdgeInsets.only(top: 18, bottom: 30, left: 30, right: 30),
+                    EdgeInsets.only(top: 18, bottom: 30, left: 16, right: 16),
                 child: Column(
                   children: [
                     Row(
@@ -221,7 +221,7 @@ class _WomenCategoryState extends State<WomenCategory> {
             body: SingleChildScrollView(
               child: Container(
                 margin:
-                    EdgeInsets.only(top: 18, bottom: 30, left: 30, right: 30),
+                    EdgeInsets.only(top: 18, bottom: 30, left: 16, right: 16),
                 child: Column(
                   children: [
                     Row(
