@@ -30,6 +30,10 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   ProductModel? productModel;
   bool isloaded = true;
+  CarouselController controller = CarouselController();
+
+  int _current = 0;
+  // list image network
 
   void getAllListPL() async {
     setState(() {
@@ -180,6 +184,46 @@ class _DetailPageState extends State<DetailPage> {
                                   width: 26,
                                 )),
                     ),
+
+                    onPressed: () {
+                      addCart
+                          ? delete(widget.data)
+                          : showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Add to cart"),
+                                  content: Text("Are you sure to add to cart?"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Cancel"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        insert(widget.data);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Yes"),
+                                    ),
+                                  ],
+                                );
+                              });
+                    },
+                    child: addCart
+                        ? Image.asset(
+                            "assets/images/bagFill.png",
+                            height: 26,
+                            width: 26,
+                          )
+                        : Image.asset(
+                            "assets/images/bagFill.png",
+                            height: 26,
+                            width: 26,
+                          )),
+              ),
                     Expanded(
                       child: Container(
                         margin: EdgeInsets.only(left: 16),
@@ -287,22 +331,67 @@ class _DetailPageState extends State<DetailPage> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                  // carousel slider
+                  // carousel slider with on page change
                   background: Container(
-                    child: CarouselSlider(
-                      options: CarouselOptions(
-                        enableInfiniteScroll: false,
-                        height: 300,
-                        scrollDirection: Axis.horizontal,
-                      ),
-                      items: [
-                        Image.network(
-                          widget.data.img1!,
-                          fit: BoxFit.fitHeight,
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 357,
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              enableInfiniteScroll: false,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  _current = index;
+                                });
+                              },
+                            ),
+                            items: [
+                              Image.network(
+                                widget.data.img1!,
+                                fit: BoxFit.cover,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                              Image.network(
+                                widget.data.img2!,
+                                fit: BoxFit.cover,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                            ],
+                          ),
                         ),
-                        Image.network(
-                          widget.data.img2!,
-                          fit: BoxFit.fitHeight,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: widget.data.img1 == null
+                              ? []
+                              : widget.data.img2 == null
+                                  ? []
+                                  : [
+                                      Container(
+                                        width: 6.0,
+                                        height: 6.0,
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 2.0),
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: _current == 0
+                                              ? Color(0xFF1B1B1B)
+                                              : Color(0xFFD8D8D8),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 6.0,
+                                        height: 6.0,
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 2.0),
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: _current == 1
+                                              ? Color(0xFF1B1B1B)
+                                              : Color(0xFFD8D8D8),
+                                        ),
+                                      ),
+                                    ],
                         ),
                       ],
                     ),
