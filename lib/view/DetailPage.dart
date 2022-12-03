@@ -3,9 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
-import 'package:pas_bisnis_2022/services/Wrapper.dart';
 import 'package:pas_bisnis_2022/view/Cart.dart';
-import 'package:pas_bisnis_2022/view/Login.dart';
 import 'package:pas_bisnis_2022/view/transaction.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
@@ -16,8 +14,6 @@ import 'package:readmore/readmore.dart';
 import 'package:pas_bisnis_2022/shared/Share.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class DetailPage extends StatefulWidget {
   DetailPage({Key? key, required this.data}) : super(key: key);
@@ -117,74 +113,25 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomSheet: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.userChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Container(
-                color: Colors.white,
-                padding:
-                    EdgeInsets.only(top: 10, bottom: 10, left: 24, right: 24),
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 69,
-                      height: 47.5,
-                      child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            side: BorderSide(
-                              width: 1.8,
-                              color: Color(0xFF1B1B1B),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          onPressed: () {
-                            addCart
-                                ? delete(widget.data)
-                                :
-                                // dialog add to cart
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text("Add to cart"),
-                                        content: Text(
-                                            "Are you sure to add to cart?"),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text("Cancel"),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              insert(widget.data);
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text("Yes"),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                          },
-                          child: addCart
-                              ? Image.asset(
-                                  "assets/images/bagFill.png",
-                                  height: 26,
-                                  width: 26,
-                                )
-                              : Image.asset(
-                                  "assets/images/bagOutline.png",
-                                  height: 26,
-                                  width: 26,
-                                )),
+        bottomSheet: Container(
+          color: Colors.white,
+          padding: EdgeInsets.only(top: 10, bottom: 10, left: 24, right: 24),
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [
+              Container(
+                width: 69,
+                height: 47.5,
+                child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(
+                        width: 1.8,
+                        color: Color(0xFF1B1B1B),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(8.0),
+                      ),
                     ),
-
                     onPressed: () {
                       addCart
                           ? delete(widget.data)
@@ -224,73 +171,39 @@ class _DetailPageState extends State<DetailPage> {
                             width: 26,
                           )),
               ),
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(left: 16),
-                        width: MediaQuery.of(context).size.width,
-                        height: 47.5,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xFF1B1B1B),
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          onPressed: () {
-                            snapshot.data!.email != null
-                                ? Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            transaction(data: widget.data)),
-                                  )
-                                : showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text("Login"),
-                                        content:
-                                            Text("You must login to check out"),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text("Cancel"),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              FirebaseAuth.instance.signOut();
-                                              Navigator.pushReplacement(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Wrapper()));
-                                            },
-                                            child: Text("Yes"),
-                                          ),
-                                        ],
-                                      );
-                                    });
-                          },
-                          child: Text(
-                            'Check Out',
-                            style: TextStyle(
-                                color: Color(0xFFFFFFFF),
-                                fontFamily: "Lexend",
-                                fontSize: 18),
-                          ),
-                        ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(left: 16),
+                  width: MediaQuery.of(context).size.width,
+                  height: 47.5,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF1B1B1B),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(8.0),
                       ),
                     ),
-                  ],
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                transaction(data: widget.data)),
+                      );
+                    },
+                    child: Text(
+                      'Check Out',
+                      style: TextStyle(
+                          color: Color(0xFFFFFFFF),
+                          fontFamily: "Lexend",
+                          fontSize: 18),
+                    ),
+                  ),
                 ),
-              );
-            } else {
-              return Container();
-            }
-          },
+              ),
+            ],
+          ),
         ),
         body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -521,7 +434,7 @@ class _DetailPageState extends State<DetailPage> {
                             Container(
                               margin: EdgeInsets.only(left: 16),
                               child: Text(
-                                "Free Shipping on orders above Rp. 750.000",
+                                "Free Shipping on orders above Rp. 500.000",
                                 style: SharedCode().textStyle("Lexend", 13,
                                     Color(0xFF1B1B1B), FontWeight.w600),
                               ),

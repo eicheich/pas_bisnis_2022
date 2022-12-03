@@ -30,37 +30,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController _controller;
   int _selectedIndex = 0;
 
-  ProductModel? productModel;
-  bool isloaded = true;
-
   List<Widget> list = [
     Tab(icon: Text("All")),
     Tab(icon: Text("Men")),
     Tab(icon: Text("Women")),
   ];
 
-  void getAllListPL() async {
-    setState(() {
-      isloaded = false;
-    });
-    final res = await http.get(
-      Uri.parse("https://api-shoestore.000webhostapp.com/data.php"),
-    );
-
-    print("status code " + res.statusCode.toString());
-    productModel = ProductModel.fromJson(json.decode(res.body.toString()));
-    print("team 0 : " + productModel!.data![0].brand.toString());
-    setState(() {
-      isloaded = true;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    getAllListPL();
     _controller = TabController(length: list.length, vsync: this);
-
     _controller.addListener(() {
       setState(() {
         _selectedIndex = _controller.index;
