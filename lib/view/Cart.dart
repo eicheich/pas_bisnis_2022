@@ -153,7 +153,7 @@ class _cartState extends State<cart> {
                                     margin: EdgeInsets.only(left: 10),
                                     child: Text(
                                       (int.parse(cartdata[index].price!) >
-                                              500000)
+                                              750000)
                                           ? "Free"
                                           : "Rp. 20.000",
                                       style: SharedCode().textStyle(

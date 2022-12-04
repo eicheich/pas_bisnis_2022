@@ -26,6 +26,10 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   ProductModel? productModel;
   bool isloaded = true;
+  CarouselController controller = CarouselController();
+
+  int _current = 0;
+  // list image network
 
   void getAllListPL() async {
     setState(() {
@@ -131,9 +135,7 @@ class _DetailPageState extends State<DetailPage> {
                     onPressed: () {
                       addCart
                           ? delete(widget.data)
-                          :
-                          // dialog add to cart
-                          showDialog(
+                          : showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
@@ -164,7 +166,7 @@ class _DetailPageState extends State<DetailPage> {
                             width: 26,
                           )
                         : Image.asset(
-                            "assets/images/bagOutline.png",
+                            "assets/images/bagFill.png",
                             height: 26,
                             width: 26,
                           )),
@@ -230,7 +232,7 @@ class _DetailPageState extends State<DetailPage> {
                 stretch: false,
                 pinned: true,
                 floating: false,
-                expandedHeight: 377,
+                expandedHeight: 400,
                 elevation: 0,
                 title: Text(
                   widget.data.title!,
@@ -242,22 +244,68 @@ class _DetailPageState extends State<DetailPage> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                  // carousel slider
+                  // carousel slider with on page change
                   background: Container(
-                    child: CarouselSlider(
-                      options: CarouselOptions(
-                        enableInfiniteScroll: false,
-                        height: 300,
-                        scrollDirection: Axis.horizontal,
-                      ),
-                      items: [
-                        Image.network(
-                          widget.data.img1!,
-                          fit: BoxFit.fitHeight,
+                    child: Column(
+                      children: [
+                        SizedBox(height: 43),
+                        Container(
+                          height: 357,
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              enableInfiniteScroll: false,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  _current = index;
+                                });
+                              },
+                            ),
+                            items: [
+                              Image.network(
+                                widget.data.img1!,
+                                fit: BoxFit.cover,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                              Image.network(
+                                widget.data.img2!,
+                                fit: BoxFit.cover,
+                                width: MediaQuery.of(context).size.width,
+                              ),
+                            ],
+                          ),
                         ),
-                        Image.network(
-                          widget.data.img2!,
-                          fit: BoxFit.fitHeight,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: widget.data.img1 == null
+                              ? []
+                              : widget.data.img2 == null
+                                  ? []
+                                  : [
+                                      Container(
+                                        width: 6.0,
+                                        height: 6.0,
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 2.0),
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: _current == 0
+                                              ? Color(0xFF1B1B1B)
+                                              : Color(0xFFD8D8D8),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 6.0,
+                                        height: 6.0,
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 2.0),
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: _current == 1
+                                              ? Color(0xFF1B1B1B)
+                                              : Color(0xFFD8D8D8),
+                                        ),
+                                      ),
+                                    ],
                         ),
                       ],
                     ),
@@ -387,7 +435,7 @@ class _DetailPageState extends State<DetailPage> {
                             Container(
                               margin: EdgeInsets.only(left: 16),
                               child: Text(
-                                "Free Shipping on orders above Rp. 500.000",
+                                "Free Shipping on orders above Rp. 750.000",
                                 style: SharedCode().textStyle("Lexend", 13,
                                     Color(0xFF1B1B1B), FontWeight.w600),
                               ),
@@ -441,11 +489,7 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![0].img1.toString(),
                                       productModel!.data![0].title.toString(),
                                       productModel!.data![0].sold.toString(),
-                                      productModel!.data![0].price!
-                                          .replaceAllMapped(
-                                              new RegExp(
-                                                  r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                              (Match m) => '${m[1]}.'),
+                                      priceFormatIdr(0),
                                     )
                                   : SharedCode().placeholder(),
                             ),
@@ -466,11 +510,7 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![2].img1.toString(),
                                       productModel!.data![2].title.toString(),
                                       productModel!.data![2].sold.toString(),
-                                      productModel!.data![2].price!
-                                          .replaceAllMapped(
-                                              new RegExp(
-                                                  r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                              (Match m) => '${m[1]}.'),
+                                      priceFormatIdr(2),
                                     )
                                   : SharedCode().placeholder(),
                             ),
@@ -491,7 +531,7 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![13].img1.toString(),
                                       productModel!.data![13].title.toString(),
                                       productModel!.data![13].sold.toString(),
-                                      productModel!.data![13].price.toString())
+                                      priceFormatIdr(13))
                                   : SharedCode().placeholder(),
                             ),
                           ),
@@ -511,7 +551,7 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![7].img1.toString(),
                                       productModel!.data![7].title.toString(),
                                       productModel!.data![7].sold.toString(),
-                                      productModel!.data![7].price.toString())
+                                      priceFormatIdr(7))
                                   : SharedCode().placeholder(),
                             ),
                           ),
@@ -531,7 +571,7 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![15].img1.toString(),
                                       productModel!.data![15].title.toString(),
                                       productModel!.data![15].sold.toString(),
-                                      productModel!.data![15].price.toString())
+                                      priceFormatIdr(15))
                                   : SharedCode().placeholder(),
                             ),
                           ),
@@ -569,7 +609,7 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![3].img1.toString(),
                                       productModel!.data![3].title.toString(),
                                       productModel!.data![3].sold.toString(),
-                                      productModel!.data![3].price.toString())
+                                      priceFormatIdr(3))
                                   : SharedCode().placeholder(),
                             ),
                           ),
@@ -589,7 +629,7 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![6].img1.toString(),
                                       productModel!.data![6].title.toString(),
                                       productModel!.data![6].sold.toString(),
-                                      productModel!.data![6].price.toString())
+                                      priceFormatIdr(6))
                                   : SharedCode().placeholder(),
                             ),
                           ),
@@ -609,7 +649,7 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![9].img1.toString(),
                                       productModel!.data![9].title.toString(),
                                       productModel!.data![9].sold.toString(),
-                                      productModel!.data![9].price.toString())
+                                      priceFormatIdr(9))
                                   : SharedCode().placeholder(),
                             ),
                           ),
@@ -629,7 +669,7 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![12].img1.toString(),
                                       productModel!.data![12].title.toString(),
                                       productModel!.data![12].sold.toString(),
-                                      productModel!.data![12].price.toString())
+                                      priceFormatIdr(12))
                                   : SharedCode().placeholder(),
                             ),
                           ),
@@ -649,7 +689,7 @@ class _DetailPageState extends State<DetailPage> {
                                       productModel!.data![16].img1.toString(),
                                       productModel!.data![16].title.toString(),
                                       productModel!.data![16].sold.toString(),
-                                      productModel!.data![16].price.toString())
+                                      priceFormatIdr(16))
                                   : SharedCode().placeholder(),
                             ),
                           ),
@@ -665,5 +705,10 @@ class _DetailPageState extends State<DetailPage> {
             ),
           ),
         ));
+  }
+
+  String priceFormatIdr(int index) {
+    return productModel!.data![index].price!.replaceAllMapped(
+        new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
   }
 }

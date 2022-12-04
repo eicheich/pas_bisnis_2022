@@ -32,8 +32,6 @@ class _NotifState extends State<Notif> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     getAllListPL();
   }
 

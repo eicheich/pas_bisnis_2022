@@ -14,28 +14,31 @@ class WomenCategory extends StatefulWidget {
 
 class _WomenCategoryState extends State<WomenCategory> {
   ProductModel? productModel;
-  bool isloaded = true;
+  bool isloaded = false;
 
-  void getAllListPL() async {
-    setState(() {
-      isloaded = false;
-    });
+  // agar cepat load
+
+
+   void getAllListPL() async {
     final res = await http.get(
       Uri.parse("https://api-shoestore.000webhostapp.com/data.php"),
     );
-    print("status code " + res.statusCode.toString());
-    productModel = ProductModel.fromJson(json.decode(res.body.toString()));
-    print("team 0 : " + productModel!.data![0].brand.toString());
-    setState(() {
-      isloaded = true;
-    });
+    if (res.statusCode == 200) {
+      final data = jsonDecode(res.body);
+      setState(() {
+        productModel = ProductModel.fromJson(data);
+        isloaded = true;
+      });
+    } else {
+      throw Exception("Failed to load data");
+    }
   }
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     getAllListPL();
+    super.initState();
+
   }
 
   @override
@@ -45,7 +48,7 @@ class _WomenCategoryState extends State<WomenCategory> {
             body: SingleChildScrollView(
               child: Container(
                 margin:
-                    EdgeInsets.only(top: 18, bottom: 30, left: 16, right: 16),
+                    EdgeInsets.only(top: 18, bottom: 30, left: 30, right: 30),
                 child: Column(
                   children: [
                     Row(
@@ -221,7 +224,7 @@ class _WomenCategoryState extends State<WomenCategory> {
             body: SingleChildScrollView(
               child: Container(
                 margin:
-                    EdgeInsets.only(top: 18, bottom: 30, left: 16, right: 16),
+                    EdgeInsets.only(top: 18, bottom: 30, left: 30, right: 30),
                 child: Column(
                   children: [
                     Row(
