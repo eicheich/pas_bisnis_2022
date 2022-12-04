@@ -69,7 +69,6 @@ class _historyState extends State<history> {
 
   @override
   void initState() {
-
     initDb();
   }
 

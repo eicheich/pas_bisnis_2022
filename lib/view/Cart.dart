@@ -114,140 +114,89 @@ class _cartState extends State<cart> {
                             data: cartdata[index],
                           )),
                 ).then((value) => initDb());
-                ;
               },
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 16,
-                ),
-                child: Container(
-                  height: 200,
-                  padding:
-                      EdgeInsets.only(top: 12, bottom: 12, left: 24, right: 24),
-                  color: Colors.white,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              child: Image.network(
-                                cartdata[index].img1!,
-                                width: 115,
-                                height: 115,
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 20),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    child: Image.asset(
-                                      "assets/images/delivery.png",
-                                      width: 24,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      (int.parse(cartdata[index].price!) >
-                                              750000)
-                                          ? "Free"
-                                          : "Rp. 20.000",
-                                      style: SharedCode().textStyle(
-                                          "Poppins",
-                                          14,
-                                          Color(0xFF1B1B1B),
-                                          FontWeight.w600),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+              onLongPress: (() {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Delete Item"),
+                      content: Text(
+                          "Are you sure to delete ${cartdata[index].title}?"),
+                      titleTextStyle: SharedCode().textStyle(
+                          "Lexend", 16, Color(0xFF1B1B1B), FontWeight.w500),
+                      contentTextStyle: SharedCode().textStyle(
+                          "Lexend", 14, Color(0xFF1B1B1B), FontWeight.w400),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            "Cancel",
+                            style: SharedCode().textStyle("Lexend", 14,
+                                Color(0xFF1B1B1B), FontWeight.w400),
+                          ),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 13),
-                        color: Color(0xFF1B1B1B).withOpacity(0.8),
-                        height: MediaQuery.of(context).size.height,
-                        width: 0.8,
-                      ),
-                      Column(
+                        TextButton(
+                          onPressed: () {
+                            delete(cartdata[index].id).then((value) {
+                              getAddCart().then((value) {
+                                setState(() {
+                                  cartdata = value;
+                                });
+                              });
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            "Yes",
+                            style: SharedCode().textStyle("Lexend", 14,
+                                Color(0xFF1B1B1B), FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }),
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 8),
+                padding:
+                    EdgeInsets.only(top: 12, bottom: 12, left: 24, right: 24),
+                color: Colors.white,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            height: 115,
-                            width: 220,
-                            margin: EdgeInsets.only(left: 14),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Text(
-                                    cartdata[index].title!,
-                                    style: SharedCode().textStyle("Lexend", 14,
-                                        Color(0xFF1B1B1B), FontWeight.w500),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 8),
-                                  child: Text(
-                                    cartdata[index].desc!,
-                                    style: SharedCode().textStyle(
-                                        "Lexend",
-                                        13,
-                                        Color(0xFF1B1B1B).withOpacity(0.7),
-                                        FontWeight.w400),
-                                    maxLines: 3,
-                                  ),
-                                ),
-                              ],
+                            child: Image.network(
+                              cartdata[index].img1!,
+                              width: 115,
+                              height: 115,
                             ),
                           ),
                           Container(
-                            width: 220,
-                            margin: EdgeInsets.only(left: 14),
+                            margin: EdgeInsets.only(top: 20),
                             child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(top: 20),
-                                  child: Text(
-                                    "Rp. ${cartdata[index].price!.replaceAllMapped(new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}",
-                                    style: SharedCode().textStyle("Poppins", 14,
-                                        Color(0xFF1B1B1B), FontWeight.w600),
+                                  child: Image.asset(
+                                    "assets/images/delivery.png",
+                                    width: 24,
                                   ),
                                 ),
-                                Spacer(),
                                 Container(
-                                  margin: EdgeInsets.only(top: 16),
-                                  width: 100,
-                                  height: 31,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Color(0xFF1B1B1B),
-                                      elevation: 0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(8.0),
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => transaction(
-                                                data: cartdata[index])),
-                                      );
-                                    },
-                                    child: Text(
-                                      'Check Out',
-                                      style: SharedCode().textStyle("Lexend",
-                                          12, Colors.white, FontWeight.w400),
-                                    ),
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    (int.parse(cartdata[index].price!) > 750000)
+                                        ? "Free"
+                                        : "Rp. 20.000",
+                                    style: SharedCode().textStyle("Poppins", 14,
+                                        Color(0xFF1B1B1B), FontWeight.w600),
                                   ),
                                 ),
                               ],
@@ -255,8 +204,94 @@ class _cartState extends State<cart> {
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 13),
+                      color: Color(0xFF1B1B1B).withOpacity(0.8),
+                      height: MediaQuery.of(context).size.height / 5,
+                      width: 0.8,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 115,
+                          width: 220,
+                          margin: EdgeInsets.only(left: 14),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Text(
+                                  cartdata[index].title!,
+                                  style: SharedCode().textStyle("Lexend", 14,
+                                      Color(0xFF1B1B1B), FontWeight.w500),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 8),
+                                child: Text(
+                                  cartdata[index].desc!,
+                                  style: SharedCode().textStyle(
+                                      "Lexend",
+                                      13,
+                                      Color(0xFF1B1B1B).withOpacity(0.7),
+                                      FontWeight.w400),
+                                  maxLines: 3,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 220,
+                          margin: EdgeInsets.only(left: 14),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                child: Text(
+                                  "Rp. ${cartdata[index].price!.replaceAllMapped(new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}",
+                                  style: SharedCode().textStyle("Poppins", 14,
+                                      Color(0xFF1B1B1B), FontWeight.w600),
+                                ),
+                              ),
+                              Spacer(),
+                              Container(
+                                margin: EdgeInsets.only(top: 16),
+                                width: 100,
+                                height: 31,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color(0xFF1B1B1B),
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => transaction(
+                                              data: cartdata[index])),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Check Out',
+                                    style: SharedCode().textStyle("Lexend", 12,
+                                        Colors.white, FontWeight.w400),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             );
