@@ -23,22 +23,37 @@ class AllCategory extends StatefulWidget {
 
 class _AllCategoryState extends State<AllCategory> {
   ProductModel? productModel;
-  bool isloaded = true;
+  bool isloaded = false;
 
   void getAllListPL() async {
-    setState(() {
-      isloaded = false;
-    });
     final res = await http.get(
       Uri.parse("https://api-shoestore.000webhostapp.com/data.php"),
     );
-    print("status code " + res.statusCode.toString());
-    productModel = ProductModel.fromJson(json.decode(res.body.toString()));
-    print("team 0 : " + productModel!.data![0].brand.toString());
-    setState(() {
-      isloaded = true;
-    });
+    if (res.statusCode == 200) {
+      final data = jsonDecode(res.body);
+      setState(() {
+        productModel = ProductModel.fromJson(data);
+        isloaded = true;
+      });
+    } else {
+      throw Exception("Failed to load data");
+    }
   }
+  // void getAllListPL() async {
+  //   final response = await http.get(
+  //     Uri.parse("https://api-shoestore.000webhostapp.com/data.php"),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     final data = jsonDecode(response.body);
+  //     productModel = ProductModel.fromJson(json.decode(data.body.toString()));
+  //     setState(() {
+  //       productModel = ProductModel.fromJson(data);
+  //       isloaded = true;
+  //     });
+  //   } else {
+  //     throw Exception("Failed to load data");
+  //   }
+  // }
 
   @override
   void initState() {

@@ -59,10 +59,8 @@ class _nikeState extends State<nike> {
               backgroundColor: Color(0xFF1B1B1B),
               title: Text(
                 productModel!.data![7].brand.toString(),
-                style: TextStyle(
-                  fontFamily: 'Lexend',
-                  color: Color.fromARGB(255, 255, 255, 255),
-                ),
+                style: SharedCode()
+              .textStyle("Lexend", 20, Colors.white, FontWeight.w400),
               ),
             ),
             body: Container(
