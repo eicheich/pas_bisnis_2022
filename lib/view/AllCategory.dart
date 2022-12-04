@@ -80,7 +80,7 @@ class _AllCategoryState extends State<AllCategory> {
                         enableInfiniteScroll: true,
                         reverse: false,
                         autoPlay: true,
-                        autoPlayInterval: Duration(seconds: 3),
+                        autoPlayInterval: Duration(seconds: 5),
                         autoPlayAnimationDuration: Duration(milliseconds: 800),
                         enlargeCenterPage: false,
                         scrollPhysics: NeverScrollableScrollPhysics()),
