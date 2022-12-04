@@ -32,7 +32,8 @@ class _ProfileState extends State<Profile> {
                       pinned: true,
                       floating: false,
                       // expandedHeight: 377,
-                      collapsedHeight: 352,
+                      collapsedHeight:
+                          MediaQuery.of(context).size.height / 2.38,
                       elevation: 3,
                       shadowColor: Color(0xFF1B1B1B).withOpacity(0.25),
                       title: Container(
