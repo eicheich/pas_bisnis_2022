@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:pas_bisnis_2022/shared/Share.dart';
 import 'package:pas_bisnis_2022/view/DetailPage.dart';
 import 'package:pas_bisnis_2022/view/Navigation.dart';
 
@@ -42,553 +43,118 @@ class _pumaState extends State<puma> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: isloaded == true
-            ? AppBar(
-                backgroundColor: Color(0xFF1E5128),
-                title: Text(
-                  productModel!.data![1].brand.toString(),
-                  style: TextStyle(
-                    fontFamily: 'Lexend',
-                    color: Color.fromARGB(255, 255, 255, 255),
-                  ),
+    return isloaded
+        ? Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios_new_outlined,
+                  color: Colors.white,
                 ),
-              )
-            : AppBar(
-                backgroundColor: Color(0xFF1E5128),
-                title: Text(
-                  "Loading",
-                  style: TextStyle(
-                    color: Colors.white,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              backgroundColor: Color(0xFF1B1B1B),
+              title: Text(
+                productModel!.data![10].brand.toString(),
+                style: SharedCode()
+              .textStyle("Lexend", 20, Colors.white, FontWeight.w400),
+              ),
+            ),
+            body: Container(
+              margin: EdgeInsets.only(top: 18, bottom: 30, left: 30, right: 30),
+              child: Column(
+                children: [
+                  Row(children: [
+                    InkWell(
+                      child: SharedCode().productUi(
+                        productModel!.data![1].img1!,
+                        productModel!.data![1].title!,
+                        productModel!.data![1].sold!,
+                        productModel!.data![1].price!.replaceAllMapped(
+                            new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                            (Match m) => '${m[1]}.'),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailPage(data: productModel!.data![1])),
+                        );
+                      },
+                    ),
+                    Spacer(),
+                    InkWell(
+                      child: SharedCode().productUi(
+                        productModel!.data![8].img1!,
+                        productModel!.data![8].title!,
+                        productModel!.data![8].sold!,
+                        productModel!.data![8].price!.replaceAllMapped(
+                            new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                            (Match m) => '${m[1]}.'),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailPage(data: productModel!.data![8])),
+                        );
+                      },
+                    ),
+                  ]),
+                  SizedBox(
+                    height: 13,
                   ),
-                )),
-        body: Center(
-          child: Column(
-            children: [
-              InkWell(
-                child: Card(
-                    margin: EdgeInsets.all(10),
-                    child: isloaded == true
-                        ? Container(
-                            margin:
-                                EdgeInsets.only(right: 10, left: 10, top: 10),
-                            child: Row(
-                              children: [
-                                Container(
-                                    margin: EdgeInsets.only(right: 10),
-                                    width: 70,
-                                    height: 70,
-                                    child: Image.network(productModel!
-                                        .data![1].img1
-                                        .toString())),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      productModel!.data![1].title.toString(),
-                                      style: TextStyle(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'Rp. ' +
-                                          productModel!.data![1].price
-                                              .toString(),
-                                      style: TextStyle(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'Sold ' +
-                                          productModel!.data![1].sold
-                                              .toString(),
-                                      style: TextStyle(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 10,
-                                          color: Color(0xFF909090),
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                    SizedBox(height: 10),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 93,
-                                ),
-                                Container(
-                                  alignment: Alignment.centerRight,
-                                  child: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Color(0xFF1E5128),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : Container(
-                            width: 363,
-                            height: 78,
-                            child: Stack(children: <Widget>[
-                              Positioned(
-                                  top: 0,
-                                  left: 0,
-                                  child: Container(
-                                      width: 363,
-                                      height: 78,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color:
-                                                  Color.fromRGBO(0, 0, 0, 0.25),
-                                              offset: Offset(0, 4),
-                                              blurRadius: 4)
-                                        ],
-                                        color: Color.fromRGBO(206, 206, 206, 1),
-                                      ))),
-                              Positioned(
-                                  top: 0,
-                                  left: 0,
-                                  child: Container(
-                                      width: 87,
-                                      height: 78,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(136, 136, 136, 1),
-                                      ))),
-                              Positioned(
-                                  top: 27,
-                                  left: 347,
-                                  child: Container(
-                                    width: 24,
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromRGBO(255, 255, 255, 1),
-                                    ),
-                                  )),
-                              Positioned(
-                                  top: 8,
-                                  left: 105,
-                                  child: Container(
-                                      width: 169,
-                                      height: 18,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(136, 136, 136, 1),
-                                      ))),
-                              Positioned(
-                                  top: 32,
-                                  left: 105,
-                                  child: Container(
-                                      width: 97,
-                                      height: 14,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(153, 152, 152, 1),
-                                      ))),
-                              Positioned(
-                                  top: 52,
-                                  left: 105,
-                                  child: Container(
-                                      width: 56,
-                                      height: 14,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(181, 181, 181, 1),
-                                      ))),
-                            ]))),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            DetailPage(data: productModel!.data![1])),
-                  );
+                  Row(
+                    children: [
+                      InkWell(
+                        child: SharedCode().productUi(
+                          productModel!.data![10].img1!,
+                          productModel!.data![10].title!,
+                          productModel!.data![10].sold!,
+                          productModel!.data![10].price!.replaceAllMapped(
+                              new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                              (Match m) => '${m[1]}.'),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailPage(data: productModel!.data![10])),
+                          );
+                        },
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ))
+        : Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios_new_outlined,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
                 },
               ),
-              InkWell(
-                child: Card(
-                    margin: EdgeInsets.only(
-                      right: 10,
-                      left: 10,
-                    ),
-                    child: isloaded == true
-                        ? Container(
-                            margin: EdgeInsets.all(12),
-                            child: Row(
-                              children: [
-                                Container(
-                                    margin: EdgeInsets.only(right: 10),
-                                    width: 70,
-                                    height: 70,
-                                    child: Image.network(productModel!
-                                        .data![8].img1
-                                        .toString())),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      productModel!.data![8].title.toString(),
-                                      style: TextStyle(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'Rp. ' +
-                                          productModel!.data![8].price
-                                              .toString(),
-                                      style: TextStyle(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'Sold ' +
-                                          productModel!.data![8].sold
-                                              .toString(),
-                                      style: TextStyle(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 10,
-                                          color: Color(0xFF909090),
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 90,
-                                ),
-                                Container(
-                                  alignment: Alignment.centerRight,
-                                  child: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Color(0xFF1E5128),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : Container(
-                            width: 363,
-                            height: 78,
-                            child: Stack(children: <Widget>[
-                              Positioned(
-                                  top: 0,
-                                  left: 0,
-                                  child: Container(
-                                      width: 363,
-                                      height: 78,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color:
-                                                  Color.fromRGBO(0, 0, 0, 0.25),
-                                              offset: Offset(0, 4),
-                                              blurRadius: 4)
-                                        ],
-                                        color: Color.fromRGBO(206, 206, 206, 1),
-                                      ))),
-                              Positioned(
-                                  top: 0,
-                                  left: 0,
-                                  child: Container(
-                                      width: 87,
-                                      height: 78,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(136, 136, 136, 1),
-                                      ))),
-                              Positioned(
-                                  top: 27,
-                                  left: 347,
-                                  child: Container(
-                                    width: 24,
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromRGBO(255, 255, 255, 1),
-                                    ),
-                                  )),
-                              Positioned(
-                                  top: 8,
-                                  left: 105,
-                                  child: Container(
-                                      width: 169,
-                                      height: 18,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(136, 136, 136, 1),
-                                      ))),
-                              Positioned(
-                                  top: 32,
-                                  left: 105,
-                                  child: Container(
-                                      width: 97,
-                                      height: 14,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(153, 152, 152, 1),
-                                      ))),
-                              Positioned(
-                                  top: 52,
-                                  left: 105,
-                                  child: Container(
-                                      width: 56,
-                                      height: 14,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(181, 181, 181, 1),
-                                      ))),
-                            ]))),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            DetailPage(data: productModel!.data![8])),
-                  );
-                },
+              backgroundColor: Color(0xFF1B1B1B),
+              title: Text(
+                "Loading",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
-              InkWell(
-                child: Card(
-                    margin: EdgeInsets.only(
-                      top: 10,
-                      right: 10,
-                      left: 10,
-                    ),
-                    child: isloaded == true
-                        ? Container(
-                            margin: EdgeInsets.all(12),
-                            child: Row(
-                              children: [
-                                Container(
-                                    margin: EdgeInsets.only(right: 10),
-                                    width: 70,
-                                    height: 70,
-                                    child: Image.network(productModel!
-                                        .data![10].img1
-                                        .toString())),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      productModel!.data![10].title.toString(),
-                                      style: TextStyle(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'Rp. ' +
-                                          productModel!.data![10].price
-                                              .toString(),
-                                      style: TextStyle(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'Sold ' +
-                                          productModel!.data![10].sold
-                                              .toString(),
-                                      style: TextStyle(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 10,
-                                          color: Color(0xFF909090),
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 65,
-                                ),
-                                Container(
-                                  alignment: Alignment.centerRight,
-                                  child: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Color(0xFF1E5128),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : Container(
-                            width: 363,
-                            height: 78,
-                            child: Stack(children: <Widget>[
-                              Positioned(
-                                  top: 0,
-                                  left: 0,
-                                  child: Container(
-                                      width: 363,
-                                      height: 78,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color:
-                                                  Color.fromRGBO(0, 0, 0, 0.25),
-                                              offset: Offset(0, 4),
-                                              blurRadius: 4)
-                                        ],
-                                        color: Color.fromRGBO(206, 206, 206, 1),
-                                      ))),
-                              Positioned(
-                                  top: 0,
-                                  left: 0,
-                                  child: Container(
-                                      width: 87,
-                                      height: 78,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(136, 136, 136, 1),
-                                      ))),
-                              Positioned(
-                                  top: 27,
-                                  left: 347,
-                                  child: Container(
-                                    width: 24,
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                      color: Color.fromRGBO(255, 255, 255, 1),
-                                    ),
-                                  )),
-                              Positioned(
-                                  top: 8,
-                                  left: 105,
-                                  child: Container(
-                                      width: 169,
-                                      height: 18,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(136, 136, 136, 1),
-                                      ))),
-                              Positioned(
-                                  top: 32,
-                                  left: 105,
-                                  child: Container(
-                                      width: 97,
-                                      height: 14,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(153, 152, 152, 1),
-                                      ))),
-                              Positioned(
-                                  top: 52,
-                                  left: 105,
-                                  child: Container(
-                                      width: 56,
-                                      height: 14,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                          topRight: Radius.circular(8),
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                        color: Color.fromRGBO(181, 181, 181, 1),
-                                      ))),
-                            ]))),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            DetailPage(data: productModel!.data![10])),
-                  );
-                },
-              ),
-            ],
-          ),
-        ));
+            ),
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
   }
 }

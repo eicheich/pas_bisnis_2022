@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
       nextScreen: Wrapper(),
       splashTransition: SplashTransition.fadeTransition,
-      duration: 4000,
+      duration: 5000,
     );
   }
 }

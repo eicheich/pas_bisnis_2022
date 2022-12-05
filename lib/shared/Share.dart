@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class SharedCode {
   Color convertHex(String hexColor) {
@@ -92,6 +93,86 @@ class SharedCode {
             height: 23,
             width: 90,
             color: Color(0xFFD3D3D3),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget placeholderNotifUpper() {
+    return Container(
+      padding: EdgeInsets.only(left: 24, right: 24),
+      color: Color(0xFFFAFAFA),
+      height: 74,
+      child: Row(children: [
+        Container(
+          height: 24,
+          width: 24,
+          color: Color(0xFFD3D3D3),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 12, top: 16),
+              height: 19,
+              width: 73,
+              color: Color(0xFFD3D3D3),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 12, top: 4),
+              height: 15,
+              width: 140,
+              color: Color(0xFFD3D3D3),
+            ),
+          ],
+        ),
+        Spacer(),
+        Container(
+          height: 24,
+          width: 24,
+          color: Color(0xFFD3D3D3),
+        )
+      ]),
+    );
+  }
+
+  Widget placeholderNotifLower() {
+    return Container(
+      child: Row(
+        children: [
+          SizedBox(
+            width: 24,
+          ),
+          Container(
+            width: 65,
+            height: 65,
+            color: Color(0xFFD3D3D3),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 20,
+                width: 150,
+                color: Color(0xFFD3D3D3),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 2),
+                height: 15,
+                width: 230,
+                color: Color(0xFFD3D3D3),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 2),
+                height: 15,
+                width: 200,
+                color: Color(0xFFD3D3D3),
+              )
+            ],
           ),
         ],
       ),
@@ -197,12 +278,13 @@ class SharedCode {
     );
   }
 
-  Widget listProfileSetting(String image, String title, String desc) {
+  Widget listProfileSetting(
+      String image, String title, String desc, Color bgcolor) {
     return InkWell(
       onTap: () {},
       child: Container(
         padding: EdgeInsets.only(left: 24, right: 24),
-        color: Colors.white,
+        color: bgcolor,
         height: 74,
         child: Row(children: [
           Image.asset(
@@ -240,7 +322,7 @@ class SharedCode {
     );
   }
 
-  Widget listProfileInformation(String image, String title) {
+  Widget listProfileInformation(String image, String title, Color backgorund) {
     return InkWell(
       onTap: () {},
       child: Container(
@@ -271,6 +353,43 @@ class SharedCode {
             size: 24,
           ),
         ]),
+      ),
+    );
+  }
+
+  Widget listNotif(String title, String img, String h2) {
+    return Container(
+      child: Row(
+        children: [
+          SizedBox(
+            width: 24,
+          ),
+          Container(
+            width: 65,
+            height: 65,
+            child: Image.network(img),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: SharedCode().textStyle(
+                    "Lexend", 15, Color(0xFF1B1B1B), FontWeight.w500),
+              ),
+              Text(
+                h2,
+                // trim text
+                overflow: TextOverflow.ellipsis,
+                style: SharedCode().textStyle("Lexend", 12,
+                    Color(0xFF1B1B1B).withOpacity(0.75), FontWeight.w400),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
