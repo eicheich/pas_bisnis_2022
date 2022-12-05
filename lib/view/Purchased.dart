@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pas_bisnis_2022/model/ProductModel.dart';
 import 'package:pas_bisnis_2022/services/Notification.dart';
+import 'package:pas_bisnis_2022/shared/Share.dart';
 import 'package:pas_bisnis_2022/view/History.dart';
+import 'package:pas_bisnis_2022/view/Home.dart';
 import 'package:pas_bisnis_2022/view/Navigation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
@@ -63,40 +65,104 @@ class _purchasedState extends State<purchased> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Purchased'),
-      ),
-      body: SingleChildScrollView(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/PurchasedBackground.png"),
+              fit: BoxFit.fill),
+        ),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            color: Colors.greenAccent,
-            child: Column(
-              children: [
-                const Text('gambar thx for purchasing '),
-                Text('yeah'),
-              ],
-            ),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 136),
+                child: CircleAvatar(
+                  backgroundColor: Color(0xFF1B1B1B).withOpacity(0.6),
+                  radius: 100,
+                  child: CircleAvatar(
+                    backgroundColor: Color(0xFF1B1B1B).withOpacity(0.8),
+                    radius: 65,
+                    child: Image.asset(
+                      "assets/images/check.png",
+                      width: 100,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 48,
+              ),
+              Text(
+                "Payment Success",
+                style: SharedCode()
+                    .textStyle("Lexend", 32, Colors.white, FontWeight.w500),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Text(
+                "Your payment was successful!",
+                style: SharedCode()
+                    .textStyle("Lexend", 15, Colors.white, FontWeight.w400),
+              ),
+              Text(
+                "Just wait Ufee courier arrives at home",
+                style: SharedCode()
+                    .textStyle("Lexend", 15, Colors.white, FontWeight.w400),
+              ),
+              SizedBox(
+                height: 112,
+              ),
+              Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 4, top: 4),
+                    alignment: Alignment.center,
+                    height: 60,
+                    width: 190,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 1.5,
+                      ),
+                      color: Colors.transparent,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Navigation(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 17, horizontal: 24),
+                      alignment: Alignment.center,
+                      height: 60,
+                      width: 190,
+                      color: Colors.white,
+                      child: Text(
+                        "Back to Home",
+                        style: TextStyle(
+                          color: Color(0xFF1B1B1B),
+                          fontFamily: 'Lexend',
+                          fontSize: 18.5,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: isPurchased
-                ? null //jika sudah pernah membeli
-                
-                : () async {
-                    await insert(widget.data);
-                    setState(() {
-                      isPurchased = true ;
-                    });
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Navigation()),
-                    );
-                  },
-            child: Text("Back to Home"),
-          ),
-        ],
-      )),
+        ),
+      ),
     );
   }
 }

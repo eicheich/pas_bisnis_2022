@@ -243,8 +243,8 @@ class _ProfileState extends State<Profile> {
                               SizedBox(
                                 height: 25,
                               ),
-                              InkWell(
-                                onLongPress: () {
+                              GestureDetector(
+                                onTap: () {
                                   // show dialog logout
                                   showDialog(
                                       context: context,
