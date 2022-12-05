@@ -105,7 +105,7 @@ flutter:
   - assets/images/bagFill.png
   - assets/images/bagOutline.png
   - assets/images/delivery.png
-
+  - assets/images/PurchasedBackground.png
   - assets/images/account.png
   - assets/images/address.png
   - assets/images/information.png
@@ -119,6 +119,7 @@ flutter:
   - assets/images/notif_games.png
   - assets/images/notif_disc.png
   - assets/images/notif_wallet.png
+  - assets/images/check.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
