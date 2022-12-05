@@ -40,6 +40,7 @@ class _NotifState extends State<Notif> {
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Container(
           margin: EdgeInsets.only(left: 5),

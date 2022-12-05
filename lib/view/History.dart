@@ -81,6 +81,7 @@ class _historyState extends State<history> {
       appBar: AppBar(
         shadowColor: Colors.transparent,
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         title: Container(
           margin: EdgeInsets.only(left: 5),
           child: Text(
@@ -248,10 +249,23 @@ class _historyState extends State<history> {
                         Spacer(),
                         Text(
                           int.parse(historydata[reversedIndex].price!) > 750000
-                              ? historydata[reversedIndex].price!
-                              : (int.parse(historydata[reversedIndex].price!) +
-                                      20000)
-                                  .toString(),
+                              ? "Rp. " +
+                                  historydata[reversedIndex]
+                                      .price
+                                      .toString()
+                                      .replaceAllMapped(
+                                          new RegExp(
+                                              r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                          (Match m) => '${m[1]}.')
+                              : "Rp. " +
+                                  (int.parse(historydata[reversedIndex]
+                                              .price!) +
+                                          20000)
+                                      .toString()
+                                      .replaceAllMapped(
+                                          new RegExp(
+                                              r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                          (Match m) => '${m[1]}.'),
                           style: SharedCode().textStyle("Poppins", 14,
                               Color(0xFF1B1B1B), FontWeight.w600),
                         ),

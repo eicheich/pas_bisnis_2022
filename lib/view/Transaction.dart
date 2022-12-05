@@ -399,7 +399,7 @@ class _transactionState extends State<transaction> {
       ),
       bottomSheet: Container(
         padding: EdgeInsets.only(top: 16, bottom: 8, left: 24, right: 24),
-        height: MediaQuery.of(context).size.height / 7,
+        height: MediaQuery.of(context).size.height / 6.5,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: Colors.white,
