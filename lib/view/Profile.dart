@@ -31,9 +31,7 @@ class _ProfileState extends State<Profile> {
                       stretch: false,
                       pinned: true,
                       floating: false,
-                      // expandedHeight: 377,
-                      collapsedHeight:
-                          MediaQuery.of(context).size.height / 2.38,
+                      collapsedHeight: MediaQuery.of(context).size.height / 2.6,
                       elevation: 3,
                       shadowColor: Color(0xFF1B1B1B).withOpacity(0.25),
                       title: Container(
@@ -47,7 +45,7 @@ class _ProfileState extends State<Profile> {
                       flexibleSpace: FlexibleSpaceBar(
                           background: Column(
                         children: [
-                          SizedBox(height: 125),
+                          SizedBox(height: 100),
                           CircleAvatar(
                             radius: 50,
                             backgroundImage:
@@ -243,7 +241,7 @@ class _ProfileState extends State<Profile> {
                               SizedBox(
                                 height: 25,
                               ),
-                              InkWell(
+                              GestureDetector(
                                 onLongPress: () {
                                   // show dialog logout
                                   showDialog(
