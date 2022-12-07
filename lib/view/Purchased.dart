@@ -132,12 +132,20 @@ class _purchasedState extends State<purchased> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Navigation(),
-                        ),
-                      );
+                       isPurchased
+                ? null //jika sudah pernah membeli
+
+                : () async {
+                    await insert(widget.data);
+                    setState(() {
+                      isPurchased = true ;
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Navigation()),
+                    );
+                  };
+
                     },
                     child: Container(
                       padding:
