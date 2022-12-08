@@ -132,6 +132,10 @@ class _purchasedState extends State<purchased> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      isPurchased ? null : insert(widget.data);
+                      setState(() {
+                        isPurchased = true;
+                      });
                       Navigator.push(
                         context,
                         MaterialPageRoute(
